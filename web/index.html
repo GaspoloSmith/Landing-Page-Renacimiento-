@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Renacimiento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0A0A;
+    --paper:#FFFFFF;
+    --muted:#8C8C8C;
+    --charcoal:#2B2B2B;
+    --bg: var(--paper);
+    --fg: var(--ink);
+    --line: rgba(10,10,10,0.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg: var(--ink); --fg: var(--paper); --line: rgba(255,255,255,0.14); }
+  }
+  :root[data-theme="dark"]{ --bg: var(--ink); --fg: var(--paper); --line: rgba(255,255,255,0.14); }
+  :root[data-theme="light"]{ --bg: var(--paper); --fg: var(--ink); --line: rgba(10,10,10,0.12); }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; height:100%; }
+  body{
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding: 24px;
+  }
+  h1{
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight:700;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+  }
+  p{
+    color: var(--muted);
+    max-width: 42ch;
+    margin: 0 0 32px;
+  }
+  a.cta{
+    display:inline-block;
+    border: 1px solid var(--fg);
+    color: var(--fg);
+    text-decoration:none;
+    font-weight:600;
+    font-size: 0.9rem;
+    padding: 12px 24px;
+    border-radius: 4px;
+  }
+  a.cta:hover{ opacity:0.75; }
+</style>
+</head>
+<body>
+  <h1>Renacimiento</h1>
+  <p>Soluciones de IA personalizadas para negocios que todavía trabajan a mano.</p>
+  <a class="cta" href="/mantenimiento/">Planes de mantenimiento</a>
+</body>
+</html>
