@@ -26,6 +26,18 @@ a{color:var(--ink);text-decoration:none}
 a:hover{color:var(--ink)}
 p{margin:0}
 svg *{vector-effect:non-scaling-stroke}
+@media (max-width:759px){
+html{overflow-x:hidden}body{overflow-x:clip}
+[data-plate]{min-height:0 !important;aspect-ratio:5/4 !important}
+section,footer{text-align:center}
+[style*="1.7 1 440px"]{text-align:left}
+section [style*="flex-wrap"],footer [style*="flex-wrap"]{justify-content:center !important}
+a[style*="font-size:32px"]{text-align:center}
+section[data-screen-label="05 Integraciones"] div[data-reveal]{aspect-ratio:auto !important;height:300px}
+[data-route]>div:not([data-route-line]):not([data-route-fill])~div:not([data-route-line]):not([data-route-fill]){margin-top:48px !important}
+[data-route-node]{top:-22px !important}
+#agenda div[data-reveal] iframe{min-height:1020px}#agenda div[data-reveal]:has(iframe){height:1020px !important}
+}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
 </style>
 <script src="assets/hairline/kernel.js"></script>
@@ -778,7 +790,7 @@ class Component extends DCLogic {
       gearSmall: this.gear(38, 48, 13),
       showAppLabels: w >= 760,
       rt: w < 760
-        ? { lineLeft: '20px', nodeLeft: '0px', cardW: 'calc(100% - 56px)', jl: 'flex-end', mt: '24px' }
+        ? { lineLeft: '50%', nodeLeft: 'calc(50% - 20px)', cardW: '100%', jl: 'center', mt: '48px' }
         : { lineLeft: '50%', nodeLeft: 'calc(50% - 20px)', cardW: 'calc(50% - 48px)', jl: 'flex-start', mt: '-170px' },
       apps: this.LOGOS.map(({ name, src }, i) => ({
         name, src,
