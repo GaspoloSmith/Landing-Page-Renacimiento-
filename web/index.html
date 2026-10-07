@@ -6,1109 +6,813 @@
 <title>Renacimiento — Consultoría de Automatización con IA</title>
 <meta name="description" content="Automatizaciones, flujos, agentes, análisis y desarrollo de software a medida. Agendá un diagnóstico gratuito de 30 minutos.">
 <meta name="google-site-verification" content="K8Q59-RgoRJ0zWQLgilELaVEy8FsNH_IzdHNVRb0eso" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --r-primary: #BB1F1F;
-      --r-dark: #8E1717;
-      --r-accent: #D94A4A;
-      --r-black: #171717;
-      --r-charcoal: #3A3A3A;
-      --r-warm-gray: #E5E1DC;
-      --r-cream: #F5F2ED;
-      --r-white: #FFFFFF;
-      --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      --font-display: "Bodoni Moda", "Didot", "Bodoni MT", Georgia, serif;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: var(--r-cream);
-      font-family: var(--font-sans);
-      color: var(--r-charcoal);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-    }
-    ::selection { background: rgba(187,31,31,0.18); color: #171717; }
-    a { color: inherit; text-decoration: none; }
-    button { font-family: inherit; }
-    img, svg { display: block; max-width: 100%; }
-    :focus-visible { outline: 2px solid var(--r-primary); outline-offset: 3px; border-radius: 4px; }
-
-    @keyframes ren-float { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-6%);} }
-    @keyframes ren-pulse { 0%,100% { transform: scale(1); opacity: 0.85;} 50% { transform: scale(1.08); opacity: 1;} }
-    @keyframes ren-tilt  { 0% { transform: rotate(-2deg);} 50% { transform: rotate(2deg);} 100% { transform: rotate(-2deg);} }
-    @keyframes ren-drift { 0%,100% { transform: translate3d(0,0,0);} 50% { transform: translate3d(6%,-6%,0);} }
-    @keyframes ren-glow  { 0%,100% { opacity: 0.6; filter: drop-shadow(0 0 0 rgba(187,31,31,0.4));} 50% { opacity: 1; filter: drop-shadow(0 0 6px rgba(187,31,31,0.28));} }
-    @keyframes ren-intro { 0% { opacity: 0; transform: translate3d(0,28px,0);} 100% { opacity: 1; transform: translate3d(0,0,0);} }
-    @keyframes ren-card  { 0% { opacity: 0; transform: translate3d(0,18px,0) scale(0.96);} 100% { opacity: 1; transform: translate3d(0,0,0) scale(1);} }
-    @keyframes ren-strike { 0% { transform: scaleX(0);} 100% { transform: scaleX(1);} }
-    @keyframes ren-dash   { 0% { stroke-dashoffset: 0;} 100% { stroke-dashoffset: -140;} }
-    @keyframes ren-marquee { 0% { transform: translateY(0);} 100% { transform: translateY(-50%);} }
-    @keyframes ren-hero-1 { 0% { opacity: 0; transform: translate3d(0,20px,0);} 100% { opacity: 1; transform: translate3d(0,0,0);} }
-    @keyframes ren-hero-img { 0% { opacity: 0; transform: scale(1.04);} 100% { opacity: 1; transform: scale(1);} }
-
-    /* Responsive layout — media queries can't be inline */
-    .r-container { max-width: 1152px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-    @media (min-width: 768px) { .r-container { padding-left: 32px; padding-right: 32px; } }
-
-    .r-md-only { display: none; }
-    @media (min-width: 768px) { .r-md-only { display: initial; } }
-    .r-lg-only { display: none; }
-    @media (min-width: 1024px) { .r-lg-only { display: initial; } }
-    .r-mobile-only { display: initial; }
-    @media (min-width: 768px) { .r-mobile-only { display: none !important; } }
-
-    /* Section header */
-    .r-secheader { display: flex; flex-direction: column; gap: 24px; padding-bottom: 24px; margin-bottom: 48px; border-bottom: 1px solid rgba(23,23,23,0.08); }
-    @media (min-width: 768px) { .r-secheader { flex-direction: row; align-items: flex-end; justify-content: space-between; gap: 48px; } }
-
-    /* Nav */
-    .r-nav-links { display: none; }
-    @media (min-width: 768px) { .r-nav-links { display: flex; gap: 32px; align-items: center; } }
-    .r-nav-cta-full { display: none !important; }
-    @media (min-width: 768px) { .r-nav-cta-full { display: inline-flex !important; } }
-    .r-nav-cta-compact { display: inline-flex !important; }
-    @media (min-width: 768px) { .r-nav-cta-compact { display: none !important; } }
-
-    .r-navlink { position: relative; padding: 6px 0; }
-    .r-navlink::after {
-      content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%;
-      background: currentColor; transform: scaleX(0); transform-origin: left;
-      transition: transform 240ms ease;
-    }
-    .r-navlink:hover::after { transform: scaleX(1); }
-
-    /* Hero */
-    .r-hero { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
-    @media (min-width: 1024px) { .r-hero { grid-template-columns: 6fr 6fr; gap: 64px; min-height: 92vh; } }
-
-    /* Bento */
-    .r-bento-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-    @media (min-width: 768px) {
-      .r-bento-grid { grid-template-columns: repeat(6, 1fr); grid-auto-rows: minmax(120px, auto); }
-      .r-bento-a { grid-column: span 4; grid-row: span 2; }
-      .r-bento-b { grid-column: span 2; grid-row: span 1; }
-      .r-bento-c { grid-column: span 2; grid-row: span 1; }
-      .r-bento-d { grid-column: span 3; grid-row: span 1; }
-      .r-bento-e { grid-column: span 3; grid-row: span 1; }
-    }
-
-    /* Roadmap */
-    .r-road-wrap { position: relative; display: flex; flex-direction: column; gap: 32px; padding-left: 24px; border-left: 2px dashed rgba(187,31,31,0.35); max-width: 1000px; margin: 0 auto; }
-    @media (min-width: 768px) {
-      .r-road-wrap { display: block; height: 1130px; padding-left: 0; border-left: none; }
-    }
-    .r-proc { position: relative; width: 100%; }
-    @media (min-width: 768px) { .r-proc { width: 280px; position: absolute; transition: transform 300ms ease; } }
-    @media (min-width: 768px) {
-      .r-proc-1 { top: 0;     left: 15%;  transform: rotate(3.5deg); }
-      .r-proc-2 { top: 120px; right: 15%; transform: rotate(-3.5deg); }
-      .r-proc-3 { top: 450px; left: 15%;  transform: rotate(3.5deg); }
-      .r-proc-4 { top: 570px; right: 10%; transform: rotate(-3.5deg); }
-      .r-proc-5 { top: 850px; left: 15%;  transform: rotate(3.5deg); }
-      .r-proc:hover { transform: rotate(0deg) scale(1.05); z-index: 30; }
-    }
-
-    /* Agendar */
-    .r-agendar { display: grid; grid-template-columns: 1fr; gap: 48px; }
-    @media (min-width: 1024px) { .r-agendar { grid-template-columns: 4fr 8fr; gap: 64px; align-items: start; } }
-    #agendar .r-container { max-width: 1440px; }
-
-    /* Testimonials */
-    .r-testimonials { display: flex; justify-content: center; gap: 24px; margin-top: 40px; max-height: 740px; overflow: hidden;
-      -webkit-mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
-              mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent); }
-    .r-tcol-md { display: none; }
-    .r-tcol-lg { display: none; }
-    @media (min-width: 768px) { .r-tcol-md { display: block; } }
-    @media (min-width: 1024px) { .r-tcol-lg { display: block; } }
-    .r-marquee-track { animation: ren-marquee var(--dur, 20s) linear infinite; will-change: transform; }
-    .r-marquee-cols:hover .r-marquee-track { animation-play-state: paused; }
-
-    /* Services */
-    .r-services { display: grid; grid-template-columns: 1fr; gap: 12px; }
-    @media (min-width: 768px) { .r-services { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 1024px) { .r-services { grid-template-columns: repeat(3, 1fr); } }
-    .r-srv-close { display: flex; flex-direction: column; gap: 24px; margin-top: 72px; padding-top: 40px; border-top: 1px solid rgba(23,23,23,0.08); }
-    @media (min-width: 768px) { .r-srv-close { flex-direction: row; align-items: center; justify-content: space-between; gap: 32px; } }
-
-    /* Bento parent-hover-child */
-    .r-bento { transition: transform 300ms ease-out, box-shadow 300ms ease-out; }
-    .r-bento:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(23,23,23,0.08); }
-    .r-bento .r-bento-cta { opacity: 0; transition: opacity 300ms ease; }
-    .r-bento:hover .r-bento-cta { opacity: 1; }
-    .r-bento .r-bento-dots { opacity: 0; transition: opacity 300ms ease; }
-    .r-bento:hover .r-bento-dots { opacity: 1; }
-
-    /* Service card hover */
-    .r-srv { transition: transform 260ms cubic-bezier(0.16,1,0.3,1), border-color 260ms, box-shadow 260ms; }
-    .r-srv:hover { transform: translateY(-2px); border-color: rgba(187,31,31,0.28); box-shadow: 0 10px 40px rgba(23,23,23,0.04); }
-
-    /* Buttons */
-    .r-btn-primary { background: var(--r-primary); color: #fff; font-size: 15px; font-weight: 500; padding: 14px 28px; border-radius: 999px; border: none; cursor: pointer; letter-spacing: -0.005em; transition: transform 220ms cubic-bezier(0.16,1,0.3,1), background 220ms, box-shadow 220ms; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
-    .r-btn-primary:hover { background: var(--r-dark); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(187,31,31,0.22); }
-    .r-btn-primary:active { transform: translateY(0) scale(0.985); }
-    .r-btn-primary.compact { padding: 10px 18px; font-size: 13px; }
-    .r-btn-secondary { background: transparent; color: var(--r-black); border: 1px solid rgba(23,23,23,0.16); font-size: 15px; font-weight: 500; padding: 14px 28px; border-radius: 999px; cursor: pointer; transition: border-color 220ms, background 220ms, color 220ms; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
-    .r-btn-secondary:hover { border-color: var(--r-black); background: rgba(23,23,23,0.03); }
-
-    /* Underline links */
-    .r-underline { background-image: linear-gradient(currentColor, currentColor); background-size: 0% 1px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size 300ms ease; }
-    .r-underline:hover { background-size: 100% 1px; }
-
-    /* Hero strike */
-    .r-strike { position: relative; display: inline-block; font-family: var(--font-display); font-style: italic; font-weight: 500; color: var(--r-primary); font-size: 1.06em; letter-spacing: -0.01em; }
-    .r-strike::after {
-      content: ""; position: absolute; left: 0; right: 0; top: 55%; height: 2px;
-      background: var(--r-primary); transform: scaleX(0); transform-origin: left;
-      animation: ren-strike 700ms cubic-bezier(0.16,1,0.3,1) 900ms forwards;
-    }
-
-    /* Hero entry sequence */
-    .r-hero-item { opacity: 0; animation: ren-hero-1 800ms cubic-bezier(0.16,1,0.3,1) forwards; }
-    .r-hero-item.d0 { animation-delay: 0ms; }
-    .r-hero-item.d1 { animation-delay: 120ms; }
-    .r-hero-item.d2 { animation-delay: 240ms; }
-    .r-hero-item.d3 { animation-delay: 360ms; }
-    .r-hero-item.d4 { animation-delay: 480ms; }
-    .r-hero-img-wrap { opacity: 0; animation: ren-hero-img 1200ms cubic-bezier(0.16,1,0.3,1) forwards; }
-
-    /* Bento intro triggered by observer via a class */
-    .r-bento-section .r-bento-card { opacity: 0; }
-    .r-bento-section.is-visible .r-bento-card { animation: ren-card 800ms ease-out forwards; }
-    .r-bento-section.is-visible .r-bento-card.i0 { animation-delay: 0ms; }
-    .r-bento-section.is-visible .r-bento-card.i1 { animation-delay: 120ms; }
-    .r-bento-section.is-visible .r-bento-card.i2 { animation-delay: 240ms; }
-    .r-bento-section.is-visible .r-bento-card.i3 { animation-delay: 360ms; }
-    .r-bento-section.is-visible .r-bento-card.i4 { animation-delay: 480ms; }
-    .r-bento-section .r-bento-inner { opacity: 0; }
-    .r-bento-section.is-visible .r-bento-inner { animation: ren-intro 900ms ease-out forwards; }
-
-    /* Icon loops */
-    .r-icon-1 { animation: ren-float 6s ease-in-out infinite; }
-    .r-icon-2 { animation: ren-pulse 4s ease-in-out infinite; }
-    .r-icon-3 { animation: ren-tilt 5.5s ease-in-out infinite; }
-    .r-icon-4 { animation: ren-drift 8s ease-in-out infinite; }
-    .r-icon-5 { animation: ren-glow 7s ease-in-out infinite; }
-
-    /* Service reveal */
-    .r-srv-section .r-srv-card { opacity: 0; }
-    .r-srv-section.is-visible .r-srv-card { animation: ren-card 700ms ease-out forwards; }
-    .r-srv-section.is-visible .r-srv-card.i0 { animation-delay: 0ms; }
-    .r-srv-section.is-visible .r-srv-card.i1 { animation-delay: 80ms; }
-    .r-srv-section.is-visible .r-srv-card.i2 { animation-delay: 160ms; }
-    .r-srv-section.is-visible .r-srv-card.i3 { animation-delay: 240ms; }
-    .r-srv-section.is-visible .r-srv-card.i4 { animation-delay: 320ms; }
-    .r-srv-section.is-visible .r-srv-card.i5 { animation-delay: 400ms; }
-
-    /* Generic reveal */
-    .r-reveal { opacity: 0; transform: translateY(24px); transition: opacity 700ms cubic-bezier(0.16,1,0.3,1), transform 700ms cubic-bezier(0.16,1,0.3,1); }
-    .r-reveal.is-visible { opacity: 1; transform: translateY(0); }
-
-    /* Navbar scrolled state */
-    .r-navbar { background: transparent; border-bottom: 1px solid transparent; transition: background 300ms ease-out, border-color 300ms ease-out, backdrop-filter 300ms ease-out; }
-    .r-navbar.is-scrolled { background: rgba(245,242,237,0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom-color: rgba(23,23,23,0.08); }
-
-    /* Hero image treatment */
-    .r-hero-img {
-      filter: grayscale(1) contrast(1.04) brightness(1.05) blur(9px);
-      will-change: transform;
-    }
-    .r-hero-tint {
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 60% 90% at 62% 40%, rgba(187,31,31,0.16), transparent 70%);
-      mix-blend-mode: multiply;
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    /* Roadmap notebook lines */
-    .r-notebook { position: absolute; inset: 0; pointer-events: none; opacity: 0.07; background-image: linear-gradient(#171717 1px, transparent 1px); background-size: 100% 32px; margin-top: 4px; }
-    .r-fade-left, .r-fade-right { position: absolute; top: 0; bottom: 0; width: 50%; pointer-events: none; }
-    .r-fade-left { left: 0; background: linear-gradient(to right, #F5F2ED, transparent); }
-    .r-fade-right { right: 0; background: linear-gradient(to left, #F5F2ED, transparent); }
-
-    /* Cal.com skeleton */
-    .r-cal-skel { animation: ren-pulse 2.4s ease-in-out infinite; }
-
-    /* ---- Tweak: hero treatment ---- */
-    .r-hero-clean .r-hero-img {
-      filter: none; mix-blend-mode: normal;
-      -webkit-mask-image: none; mask-image: none;
-      border-radius: 16px; box-shadow: 0 30px 80px rgba(23,23,23,0.12);
-    }
-    .r-hero-clean .r-hero-tint { opacity: 0; }
-
-    /* ---- Tweak: roadmap layout ---- */
-    @media (min-width: 768px) {
-      .r-road-aligned .r-road-wrap { height: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; }
-      .r-road-aligned .r-proc { position: static !important; transform: none !important; width: 100% !important; }
-      .r-road-aligned .r-proc:hover { transform: none !important; }
-      .r-road-aligned svg.r-md-only { display: none !important; }
-    }
-
-    /* ---- Tweak: motion energy ---- */
-    .r-motion-lively .r-icon-1 { animation-duration: 3s; }
-    .r-motion-lively .r-icon-2 { animation-duration: 2s; }
-    .r-motion-lively .r-icon-3 { animation-duration: 2.5s; }
-    .r-motion-lively .r-icon-4 { animation-duration: 4s; }
-    .r-motion-lively .r-icon-5 { animation-duration: 3.5s; }
-    .r-motion-lively .r-bento:hover { transform: translateY(-8px) scale(1.012); }
-    .r-motion-lively .r-proc:hover { transform: rotate(0deg) scale(1.08); }
-    .r-motion-lively .r-srv:hover { transform: translateY(-5px); }
-
-    .r-motion-still .r-icon-1, .r-motion-still .r-icon-2, .r-motion-still .r-icon-3,
-    .r-motion-still .r-icon-4, .r-motion-still .r-icon-5 { animation: none !important; }
-    .r-motion-still .r-marquee-track { animation: none !important; }
-    .r-motion-still .r-strike::after { animation: none !important; transform: scaleX(1) !important; }
-    .r-motion-still .r-proc:hover { transform: none !important; }
-    .r-motion-still .r-bento:hover { transform: none !important; box-shadow: 0 10px 40px rgba(23,23,23,0.04) !important; }
-
-    /* Reduced motion — cut animations, show final state */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.001ms !important;
-        scroll-behavior: auto !important;
-      }
-      .r-strike::after { transform: scaleX(1); }
-      .r-hero-item, .r-hero-img-wrap, .r-bento-card, .r-bento-inner, .r-srv-card, .r-reveal { opacity: 1 !important; transform: none !important; }
-      .r-marquee-track { animation: none !important; }
-    }
-
-    /* Utility */
-    .r-eyebrow { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; }
-    .r-hair { border: none; border-top: 1px solid rgba(23,23,23,0.08); margin: 0; }
-    .r-focus-tab:focus { outline: 2px solid var(--r-primary); outline-offset: 3px; }
-
-    /* Section vertical rhythm */
-    .r-section { padding-top: clamp(88px, 11vw, 176px); padding-bottom: clamp(88px, 11vw, 176px); position: relative; }
-
-    /* Body typography helpers */
-    .r-h1 { font-size: clamp(2.75rem, 6.4vw, 6.25rem); line-height: 0.94; letter-spacing: -0.04em; color: var(--r-black); font-weight: 700; margin: 0; text-wrap: balance; }
-    .r-h2 { font-size: clamp(2rem, 4vw, 3.5rem); line-height: 0.9; letter-spacing: -0.03em; color: var(--r-black); font-weight: 700; margin: 0; text-wrap: balance; }
-    .r-h3 { font-size: clamp(1.25rem, 1.6vw, 1.5rem); line-height: 1.15; letter-spacing: -0.02em; color: var(--r-black); font-weight: 600; margin: 0; }
-    .r-lead { font-size: clamp(1.0625rem, 1.3vw, 1.25rem); line-height: 1.6; letter-spacing: -0.01em; color: var(--r-charcoal); }
-    .r-small { font-size: 0.875rem; line-height: 1.5; }
-
-    /* Bodoni display span */
-    .r-bodoni { font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 1.06em; letter-spacing: -0.01em; }
-
-    .r-navlink:hover { color: #171717; }
-    .r-underline:hover { color: #fff; }
-  </style>
-
+<script src="./support.js"></script>
 </head>
 <body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root,:root[data-rn-theme="light"]{--bg:#FFFFFF;--surface:#FFFFFF;--card:#FBFAF8;--ink:#0E0E10;--inv:#F7F6F3;--muted:#9A9AA0;--body:#5C5C63;--line:#E4E3DF;--line2:#CFCDC7;--faint:#BDBCB7;--hdr:rgba(255,255,255,0.82);--plate:#08090a;--plate-dot:#141518;--plate-label:#5b5d64;--tile:#FFFFFF;--m1:#F6F5F2;--m2:#EAE8E3;--m3:#EFEDE8;--m4:#F3F1EC;--m5:#ECEAE5;--m6:#E6EAE2;--m7:#DCDFD6;--m8:#7C8077;--logo:grayscale(1);--m9:#F1EFEA;--m10:#DEDBD4;--hl-accent:#D94A4A}
+:root[data-rn-theme="dark"]{--bg:#0B0B0D;--surface:#141416;--card:#111113;--ink:#EDEDEB;--inv:#0E0E10;--muted:#8A8C95;--body:#A6A7AE;--line:#232327;--line2:#3A3A40;--faint:#55565C;--hdr:rgba(11,11,13,0.82);--plate:#FFFFFF;--plate-dot:#EDEDF0;--plate-label:#a4a4ac;--tile:#F2F2F0;--m1:#18181B;--m2:#26262A;--m3:#212125;--m4:#101012;--m5:#161618;--m6:#1E2620;--m7:#2C3A2F;--m8:#8A9A8C;--logo:grayscale(1) invert(1);--m9:#1C1C1F;--m10:#2E2E33;--hl-accent:#BB1F1F}
+[data-hairline]{--hairline-hi:var(--hl-accent)}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Geist',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;transition:background 300ms ease,color 300ms ease}
+a{color:var(--ink);text-decoration:none}
+a:hover{color:var(--ink)}
+p{margin:0}
+svg *{vector-effect:non-scaling-stroke}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+<script src="assets/hairline/kernel.js"></script>
+<script src="assets/hairline/figures.js"></script>
+</helmet>
 
-
-<!-- Ambient background — one instance for the whole site -->
-<div aria-hidden="true" style="position:fixed;inset:0;z-index:-30;overflow:hidden;pointer-events:none">
-  <div style="position:absolute;inset:0;background: radial-gradient(ellipse 55% 100% at 12% 0%, rgba(187,31,31,0.07), transparent 65%), radial-gradient(ellipse 40% 80% at 88% 0%, rgba(229,225,220,0.55), transparent 70%), #F5F2ED;"></div>
-  <div style="position:absolute;inset:0;background-image: linear-gradient(to right, rgba(23,23,23,0.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(23,23,23,0.07) 1px, transparent 1px); background-size: 20px 20px; -webkit-mask-image: repeating-linear-gradient(to right, black 0px, black 3px, transparent 3px, transparent 8px), repeating-linear-gradient(to bottom, black 0px, black 3px, transparent 3px, transparent 8px); mask-image: repeating-linear-gradient(to right, black 0px, black 3px, transparent 3px, transparent 8px), repeating-linear-gradient(to bottom, black 0px, black 3px, transparent 3px, transparent 8px); -webkit-mask-composite: source-in; mask-composite: intersect; opacity: 0.9;"></div>
-  <div style="position:absolute;inset:0;background: radial-gradient(circle at center, rgba(0,0,0,0) 55%, rgba(245,242,237,1) 100%); filter: blur(40px); opacity: 0.75; pointer-events:none;"></div>
-</div>
-
-<!-- ==================== NAVBAR ==================== -->
-<header id="navbar" class="r-navbar" style="position:fixed;top:0;left:0;right:0;height:68px;z-index:50">
-  <nav class="r-container" style="height:100%;display:flex;align-items:center;justify-content:center;gap:48px">
-    <a href="#" style="display:inline-flex;align-items:center;gap:10px" aria-label="Renacimiento">
-      <span aria-hidden="true" style="width:8px;height:8px;background:#BB1F1F;display:inline-block"></span>
-      <span style="font-weight:600;letter-spacing:-0.02em;font-size:17px;color:#171717">Renacimiento</span>
-    </a>
-    <div style="display:flex;align-items:center;gap:32px">
-      <div class="r-nav-links">
-        <a href="#que-hacemos" class="r-navlink" style="font-size:13px;font-weight:500;color:#3A3A3A">Qué hacemos</a>
-        <a href="#proceso" class="r-navlink" style="font-size:13px;font-weight:500;color:#3A3A3A">Proceso</a>
-        <a href="#servicios" class="r-navlink" style="font-size:13px;font-weight:500;color:#3A3A3A">Servicios</a>
-      </div>
-      <button class="r-btn-primary r-nav-cta-full" onclick="goToBooking()">Agendar diagnóstico</button>
-      <button class="r-btn-primary compact r-nav-cta-compact" onclick="goToBooking()">Agendar</button>
+<!-- 0. HEADER -->
+<div style="height:64px"></div>
+<header data-screen-label="Header" style="position:fixed;top:0;left:0;right:0;z-index:50;height:64px;background:var(--hdr);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid {{ headerBorder }};transform:{{ headerY }};transition:border-color 200ms ease, transform 320ms cubic-bezier(.2,.7,.2,1)">
+  <div style="max-width:1400px;height:100%;margin:0 auto;padding:0 clamp(20px,3vw,40px);display:flex;align-items:center;gap:24px">
+    <div style="flex:1 1 0;display:flex;align-items:center">
+      <a href="#" style="display:inline-flex;align-items:flex-end;gap:3px;font-weight:600;font-size:17px;letter-spacing:-0.02em;color:var(--ink)">Renacimiento<span style="width:5px;height:5px;border-radius:50%;background:#B4532F;margin-bottom:5px"></span></a>
     </div>
-  </nav>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;align-items:center;gap:32px;font-size:14px">
+        <a href="#que-hacemos" style="color:var(--muted);transition:color 160ms" style-hover="color:var(--ink)">Qué hacemos</a>
+        <a href="#como-se-ve" style="color:var(--muted);transition:color 160ms" style-hover="color:var(--ink)">Cómo se ve</a>
+        <a href="#proceso" style="color:var(--muted);transition:color 160ms" style-hover="color:var(--ink)">Proceso</a>
+        
+      </nav>
+    </sc-if>
+    <div style="flex:1 1 0;display:flex;justify-content:flex-end;align-items:center;gap:10px">
+      <button onClick="{{ toggleTheme }}" aria-label="Cambiar tema" title="Cambiar tema" style="width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:border-color 160ms" style-hover="border-color:var(--line2)">
+        <sc-if value="{{ isDark }}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><circle cx="8" cy="8" r="3"></circle><line x1="8" y1="1.5" x2="8" y2="2.8"></line><line x1="8" y1="13.2" x2="8" y2="14.5"></line><line x1="1.5" y1="8" x2="2.8" y2="8"></line><line x1="13.2" y1="8" x2="14.5" y2="8"></line><line x1="3.4" y1="3.4" x2="4.3" y2="4.3"></line><line x1="11.7" y1="11.7" x2="12.6" y2="12.6"></line><line x1="3.4" y1="12.6" x2="4.3" y2="11.7"></line><line x1="11.7" y1="4.3" x2="12.6" y2="3.4"></line></svg></sc-if>
+        <sc-if value="{{ isLight }}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"><path d="M13.5 9.6A5.8 5.8 0 0 1 6.4 2.5a5.8 5.8 0 1 0 7.1 7.1Z"></path></svg></sc-if>
+      </button>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <a href="#agenda" style="display:inline-flex;align-items:center;height:38px;padding:0 18px;border-radius:999px;background:var(--ink);color:var(--inv);font-size:14px;font-weight:500;transition:background 180ms" style-hover="background:#B4532F;color:var(--inv)">Agendar diagnóstico</a>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMenu }}" aria-label="Menú" style="width:44px;height:44px;margin-right:-10px;border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;padding:0">
+          <span style="display:block;width:20px;height:1.5px;background:var(--ink);transition:transform 200ms;transform:{{ burgerTop }}"></span>
+          <span style="display:block;width:20px;height:1.5px;background:var(--ink);transition:transform 200ms;transform:{{ burgerBot }}"></span>
+        </button>
+      </sc-if>
+    </div>
+  </div>
 </header>
-
-<main style="padding-top:0">
-
-<!-- ==================== HERO ==================== -->
-<section aria-labelledby="hero-h1" style="position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden">
-  <div id="hero-wrap" class="r-hero-img-wrap" style="position:absolute;inset:0;z-index:0;overflow:hidden;perspective:1200px">
-    <div id="hero-img-layer" style="position:absolute;inset:-4%;transform-style:preserve-3d;transform:scale(1.12);will-change:transform">
-      <img src="assets/hero-manos.png" alt="" class="r-hero-img" style="width:100%;height:100%;object-fit:cover">
-
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;top:64px;left:0;right:0;bottom:0;z-index:49;background:var(--surface);padding:24px 20px 32px;display:flex;flex-direction:column;justify-content:space-between">
+    <nav style="display:flex;flex-direction:column">
+      <a href="#que-hacemos" onClick="{{ closeMenu }}" style="font-size:32px;font-weight:500;letter-spacing:-0.02em;padding:18px 0;border-bottom:1px solid var(--line)">Qué hacemos</a>
+      <a href="#como-se-ve" onClick="{{ closeMenu }}" style="font-size:32px;font-weight:500;letter-spacing:-0.02em;padding:18px 0;border-bottom:1px solid var(--line)">Cómo se ve</a>
+      <a href="#proceso" onClick="{{ closeMenu }}" style="font-size:32px;font-weight:500;letter-spacing:-0.02em;padding:18px 0;border-bottom:1px solid var(--line)">Proceso</a>
+      <a href="#rubros" onClick="{{ closeMenu }}" style="font-size:32px;font-weight:500;letter-spacing:-0.02em;padding:18px 0;border-bottom:1px solid var(--line)">Rubros</a>
+    </nav>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <a href="#agenda" onClick="{{ closeMenu }}" style="display:flex;align-items:center;justify-content:center;height:52px;border-radius:999px;background:var(--ink);color:var(--inv);font-size:16px;font-weight:500">Agendar diagnóstico</a>
+      <div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);text-align:center">Buenos Aires · 30 minutos · sin costo</div>
     </div>
-    <div id="hero-tint" class="r-hero-tint" style="will-change:transform"></div>
-    <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 50% 46%, rgba(245,242,237,0.62), rgba(245,242,237,0.22) 70%, transparent 90%)"></div>
-    <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:20%;background:linear-gradient(to bottom, transparent, #F5F2ED)"></div>
   </div>
+</sc-if>
 
-  <div class="r-container" style="position:relative;z-index:1;padding-top:140px;padding-bottom:80px">
-    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:28px;max-width:820px;margin:0 auto">
-      <div class="r-hero-item d0" style="display:flex;align-items:center;gap:14px">
-        <span aria-hidden="true" style="display:inline-block;width:28px;height:1px;background:#BB1F1F"></span>
-        <span class="r-eyebrow" style="color:#BB1F1F">CONSULTORÍA DE AUTOMATIZACIÓN CON IA</span>
-        <span aria-hidden="true" style="display:inline-block;width:28px;height:1px;background:#BB1F1F"></span>
-      </div>
-      <h1 id="hero-h1" class="r-h1 r-hero-item d1" style="font-size:clamp(2.25rem, 4.4vw, 4.25rem);max-width:900px">Automatizá tu negocio<br> y escapá de la <span class="r-strike" style="font-family:bondi;font-weight:700">Edad Media</span></h1>
-      <p class="r-lead r-hero-item d2" style="max-width:46ch;margin:0">Automatizaciones, flujos, agentes, análisis, desarrollo de software, y consultoria a medida.</p>
-      <div class="r-hero-item d3" style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:8px">
-        <button class="r-btn-primary" onclick="goToBooking()">Agendar diagnóstico</button>
-        <button class="r-btn-secondary" onclick="goToProceso()">Ver cómo trabajamos</button>
+<!-- 1. HERO -->
+<section data-screen-label="01 Hero" style="padding:clamp(56px,8vw,104px) 0 0">
+  <div style="max-width:1400px;margin:0 auto;padding:0 clamp(20px,3vw,40px)">
+    
+    <h1 style="margin:28px 0 0;font-size:clamp(44px,5.6vw,84px);line-height:1.03;letter-spacing:-0.02em;font-weight:500;color:var(--muted);max-width:1180px;text-wrap:balance">
+      <span style="display: block; color: var(--ink); font-weight: 600;">Tu empresa, sin trabajo manual.</span>
+      Rediseñamos tus procesos y los convertimos en sistemas trabajan con vos.
+    </h1>
+    <div style="margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px">
+      <a href="#agenda" class="scp1" style="display: inline-flex; align-items: center; height: 50px; padding: 0px 26px; border-radius: 999px; background: var(--ink); color: var(--inv); font-size: 15px; font-weight: 500; transition: background 180ms;">Agendar diagnóstico gratis</a>
+      <a href="#como-se-ve" class="scp2" style="font-size: 15px; font-weight: 500; color: var(--ink); text-decoration: underline transparent; text-underline-offset: 6px; transition: text-decoration-color 180ms;">Cómo se ve →</a>
+    </div>
+
+    <!-- HAIRLINE: caos -->
+    <div data-plate="" data-always="" style="position:relative;margin-top:clamp(48px,6vw,80px);aspect-ratio:16/10;min-height:280px;border-radius:16px;overflow:hidden;background-color:var(--plate);background-image:radial-gradient(var(--plate-dot) 1px, transparent 1.2px);background-size:22px 22px;background-position:11px 11px">
+      <div data-tilt="" style="position:absolute;inset:0;will-change:transform">
+<div data-fig="caos" style="position:absolute;top:0;bottom:0;left:50%;height:100%;aspect-ratio:5/4;transform:translateX(-50%);pointer-events:none"></div></div>
+      <div style="position:absolute;right:clamp(14px,2vw,24px);bottom:clamp(12px,2vw,20px);font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.06em;color:var(--plate-label)">ESC. 1:20</div>
+      <sc-if value="{{ showChips }}" hint-placeholder-val="{{ true }}">
+        <div data-depth="14" style="position:absolute;left:5%;top:9%">
+          <div data-float="0" style="display:flex;align-items:center;gap:8px;padding:clamp(7px,0.8vw,10px) clamp(10px,1vw,14px);border-radius:10px;background:var(--inv);color:var(--ink);font-size:clamp(11px,1vw,13px);font-weight:500;white-space:nowrap;box-shadow:0 12px 32px -12px rgba(0,0,0,0.6)">
+            <span style="font-family:'Geist Mono',monospace;color:var(--muted)">AP</span>Factura #0041 procesada<span style="color:var(--body)">✓</span>
+          </div>
+        </div>
+        <div data-depth="24" style="position:absolute;right:5%;top:30%">
+          <div data-float="1.4" style="display:flex;align-items:center;gap:8px;padding:clamp(7px,0.8vw,10px) clamp(10px,1vw,14px);border-radius:10px;background:var(--inv);color:var(--ink);font-size:clamp(11px,1vw,13px);font-weight:500;white-space:nowrap;box-shadow:0 12px 32px -12px rgba(0,0,0,0.6)">
+            <span style="width:6px;height:6px;border-radius:50%;background:#B4532F"></span>Nuevo lead → CRM
+          </div>
+        </div>
+        <div data-depth="9" style="position:absolute;left:9%;bottom:16%">
+          <div data-float="2.6" style="display:flex;align-items:center;gap:8px;padding:clamp(7px,0.8vw,10px) clamp(10px,1vw,14px);border-radius:10px;background:var(--inv);color:var(--ink);font-size:clamp(11px,1vw,13px);font-weight:500;white-space:nowrap;box-shadow:0 12px 32px -12px rgba(0,0,0,0.6)">
+            <span style="font-family:'Geist Mono',monospace;color:var(--muted)">LUN</span>Reporte del lunes listo
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<!-- 2. MARQUESINA -->
+<section data-screen-label="02 Logos" style="padding:clamp(80px,10vw,128px) 0 0">
+  <div style="max-width:1120px;margin:0 auto;padding:0 20px">
+    <div data-reveal="" style="font-family: Geist; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-align: center">Trabajamos con las herramientas que ya usás</div>
+    <div data-reveal="" style="margin-top:32px;overflow:hidden;mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%)">
+      <div data-marquee="" style="display:flex;width:max-content">
+        <sc-for list="{{ logos }}" as="l" hint-placeholder-count="12">
+          <span style="display:inline-flex;align-items:center;justify-content:center;padding:0 clamp(22px,3vw,36px)"><img src="{{ l.src }}" alt="{{ l.name }}" title="{{ l.name }}" style="width:44px;height:44px;object-fit:contain;display:block;filter:var(--logo);opacity:0.55;transition:filter 240ms ease, opacity 240ms ease" style-hover="filter:grayscale(0);opacity:1"></span>
+        </sc-for>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== QUÉ HACEMOS — BENTO ==================== -->
-<section id="que-hacemos" aria-labelledby="qh-h2" class="r-section r-bento-section">
-  <div class="r-container r-bento-inner">
-    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;max-width:760px;margin:0 auto 48px">
-      <div class="r-eyebrow" style="color:#BB1F1F">QUÉ HACEMOS</div>
-      <h2 id="qh-h2" class="r-h2">Soluciones que se encargan<br> <span class="r-bodoni" style="color: rgb(187, 31, 31); font-family: bondi; font-weight: 700;">de lo manual</span></h2>
-      <p style="font-size:1rem;line-height:1.65;color:#3A3A3A;margin:0">Antes de hablar de herramientas, entendemos qué estás haciendo a mano, que no deberías.</p>
+<!-- 3. QUÉ HACEMOS -->
+<section id="que-hacemos" data-screen-label="03 Qué hacemos" style="padding:clamp(100px,12vw,168px) 0 0;scroll-margin-top:64px">
+  <div style="max-width:1120px;margin:0 auto;padding:0 20px">
+    <h2 data-reveal="" style="margin:0;max-width:820px;font-size:clamp(28px,3.6vw,44px);line-height:1.12;letter-spacing:-0.02em;font-weight:500;color:var(--muted);text-wrap:pretty"><span style="color:var(--ink);font-weight:600">Soluciones que se encargan de lo manual.</span> Antes de hablar de herramientas, entendemos qué estás haciendo a mano que no deberías.</h2>
+    <div style="margin-top:clamp(48px,6vw,72px);display:flex;flex-wrap:wrap;gap:16px">
+
+      <article data-reveal="" style="flex:1 1 300px;min-width:0;padding:8px;border:1px solid var(--line);border-radius:16px;background:var(--card);transition:border-color 200ms ease, transform 200ms ease" style-hover="border-color:var(--line2);transform:translateY(-2px)">
+        <!-- HAIRLINE: facturas -->
+        <div data-plate="" style="position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background-color:var(--plate);background-image:radial-gradient(var(--plate-dot) 1px, transparent 1.2px);background-size:18px 18px;background-position:9px 9px">
+          <div data-tilt="" style="position:absolute;inset:0;will-change:transform">
+<div data-fig="facturas" style="position:absolute;top:0;bottom:0;left:50%;height:100%;aspect-ratio:5/4;transform:translateX(-50%);pointer-events:none"></div></div>
+          
+        </div>
+        <div style="padding:20px 12px 14px">
+          <div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.06em;color:var(--muted)">AP</div>
+          <h3 style="margin:8px 0 0;font-size:19px;font-weight:600;letter-spacing:-0.02em">Cuentas a pagar</h3>
+          <p style="margin-top:6px;font-size:15px;line-height:1.45;color:var(--body);text-wrap:pretty">Las facturas llegan por mail, WhatsApp o en papel. Salen <strong style="color:var(--ink);font-weight:600">cargadas y listas</strong> para aprobar.</p>
+        </div>
+      </article>
+
+      <article data-reveal="" style="flex:1 1 300px;min-width:0;padding:8px;border:1px solid var(--line);border-radius:16px;background:var(--card);transition:border-color 200ms ease, transform 200ms ease" style-hover="border-color:var(--line2);transform:translateY(-2px)">
+        <!-- HAIRLINE: documentos -->
+        <div data-plate="" style="position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background-color:var(--plate);background-image:radial-gradient(var(--plate-dot) 1px, transparent 1.2px);background-size:18px 18px;background-position:9px 9px">
+          <div data-tilt="" style="position:absolute;inset:0;will-change:transform">
+<div data-fig="documentos" style="position:absolute;top:0;bottom:0;left:50%;height:100%;aspect-ratio:5/4;transform:translateX(-50%);pointer-events:none"></div></div>
+          
+        </div>
+        <div style="padding:20px 12px 14px">
+          <div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.06em;color:var(--muted)">DOCS</div>
+          <h3 style="margin:8px 0 0;font-size:19px;font-weight:600;letter-spacing:-0.02em">Documentos</h3>
+          <p style="margin-top:6px;font-size:15px;line-height:1.45;color:var(--body);text-wrap:pretty">Contratos, remitos y certificados convertidos en <strong style="color:var(--ink);font-weight:600">datos que podés consultar</strong>.</p>
+        </div>
+      </article>
+
+      <article data-reveal="" style="flex:1 1 300px;min-width:0;padding:8px;border:1px solid var(--line);border-radius:16px;background:var(--card);transition:border-color 200ms ease, transform 200ms ease" style-hover="border-color:var(--line2);transform:translateY(-2px)">
+        <!-- HAIRLINE: crm -->
+        <div data-plate="" style="position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background-color:var(--plate);background-image:radial-gradient(var(--plate-dot) 1px, transparent 1.2px);background-size:18px 18px;background-position:9px 9px">
+          <div data-tilt="" style="position:absolute;inset:0;will-change:transform">
+<div data-fig="crm" style="position:absolute;top:0;bottom:0;left:50%;height:100%;aspect-ratio:5/4;transform:translateX(-50%);pointer-events:none"></div></div>
+          
+        </div>
+        <div style="padding:20px 12px 14px">
+          <div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.06em;color:var(--muted)">CRM</div>
+          <h3 style="margin:8px 0 0;font-size:19px;font-weight:600;letter-spacing:-0.02em">Seguimiento</h3>
+          <p style="margin-top:6px;font-size:15px;line-height:1.45;color:var(--body);text-wrap:pretty">Cada conversación queda registrada y con el <strong style="color:var(--ink);font-weight:600">próximo paso</strong> asignado.</p>
+        </div>
+      </article>
+
+      <article data-reveal="" style="flex:1 1 420px;min-width:0;padding:8px;border:1px solid var(--line);border-radius:16px;background:var(--card);transition:border-color 200ms ease, transform 200ms ease" style-hover="border-color:var(--line2);transform:translateY(-2px)">
+        <!-- HAIRLINE: sourcing -->
+        <div data-plate="" style="position:relative;aspect-ratio:4/3;max-height:400px;width:100%;border-radius:10px;overflow:hidden;background-color:var(--plate);background-image:radial-gradient(var(--plate-dot) 1px, transparent 1.2px);background-size:18px 18px;background-position:9px 9px">
+          <div data-tilt="" style="position:absolute;inset:0;will-change:transform">
+<div data-fig="sourcing" style="position:absolute;top:0;bottom:0;left:50%;height:100%;aspect-ratio:5/4;transform:translateX(-50%);pointer-events:none"></div></div>
+          
+        </div>
+        <div style="padding:20px 12px 14px">
+          <div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.06em;color:var(--muted)">RRHH</div>
+          <h3 style="margin:8px 0 0;font-size:19px;font-weight:600;letter-spacing:-0.02em">Selección</h3>
+          <p style="margin-top:6px;font-size:15px;line-height:1.45;color:var(--body);text-wrap:pretty">Los CV llegan leídos, puntuados y ordenados. <strong style="color:var(--ink);font-weight:600">Vos entrevistás</strong>, no filtrás.</p>
+        </div>
+      </article>
+
+      <article data-reveal="" style="flex:1 1 420px;min-width:0;padding:8px;border:1px solid var(--line);border-radius:16px;background:var(--card);transition:border-color 200ms ease, transform 200ms ease" style-hover="border-color:var(--line2);transform:translateY(-2px)">
+        <!-- HAIRLINE: planilla -->
+        <div data-plate="" style="position:relative;aspect-ratio:4/3;max-height:400px;width:100%;border-radius:10px;overflow:hidden;background-color:var(--plate);background-image:radial-gradient(var(--plate-dot) 1px, transparent 1.2px);background-size:18px 18px;background-position:9px 9px">
+          <div data-tilt="" style="position:absolute;inset:0;will-change:transform">
+<div data-fig="planilla" style="position:absolute;top:0;bottom:0;left:50%;height:100%;aspect-ratio:5/4;transform:translateX(-50%);pointer-events:none"></div></div>
+          
+        </div>
+        <div style="padding:20px 12px 14px">
+          <div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.06em;color:var(--muted)">DATA</div>
+          <h3 style="margin:8px 0 0;font-size:19px;font-weight:600;letter-spacing:-0.02em">Reporting</h3>
+          <p style="margin-top:6px;font-size:15px;line-height:1.45;color:var(--body);text-wrap:pretty">Los números del lunes, <strong style="color:var(--ink);font-weight:600">listos el domingo</strong> a la noche.</p>
+        </div>
+      </article>
     </div>
-
-    <div class="r-bento-grid">
-      <!-- Card 1 -->
-      <div class="r-bento r-bento-card r-bento-a i0" role="link" tabindex="0" onclick="goToBooking()" onkeydown="handleKeyBooking(event)" style="position:relative;overflow:hidden;border-radius:16px;border:1px solid rgba(23,23,23,0.08);background:rgba(255,255,255,0.8);padding:20px;display:flex;flex-direction:column;justify-content:space-between;min-height:280px;box-shadow:0 10px 40px rgba(23,23,23,0.04);cursor:pointer">
-        <div style="position:absolute;inset:0;z-index:-1;overflow:hidden;border-radius:16px">
-          <div style="position:absolute;inset:0;background:rgba(255,255,255,0.85)"></div>
-          <div style="position:absolute;inset:0;opacity:0.7;background: radial-gradient(ellipse 60% 120% at 12% 0%, rgba(187,31,31,0.14), transparent 72%)"></div>
-        </div>
-        <div class="r-bento-dots" style="position:absolute;inset:0;background-image: radial-gradient(circle at center, rgba(23,23,23,0.04) 1px, transparent 1px); background-size: 4px 4px;pointer-events:none"></div>
-        <div style="display:flex;align-items:center;gap:12px">
-          <div class="r-icon-1" style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;flex-shrink:0;border-radius:999px;border:1px solid rgba(23,23,23,0.12);background:#fff">
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><rect x="6" y="3" width="13" height="18" rx="3" fill="#BB1F1F"></rect><rect x="9" y="8.2" width="7" height="1.7" rx="0.85" fill="#fff"></rect><rect x="9" y="12.2" width="7" height="1.7" rx="0.85" fill="#fff"></rect><rect x="9" y="16.2" width="4.3" height="1.7" rx="0.85" fill="#fff"></rect></svg>
-          </div>
-          <h3 style="font-size:1rem;font-weight:600;text-transform:uppercase;letter-spacing:0.02em;color:#171717;margin:0">Cuentas a pagar</h3>
-          <span style="margin-left:auto;border:1px solid rgba(23,23,23,0.10);padding:2px 8px;border-radius:999px;font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:#6B6B6B">AP</span>
-        </div>
-        <p style="margin:16px 0 0;font-size:0.9375rem;line-height:1.6;color:#3A3A3A">Las facturas llegan por mail, por WhatsApp y en papel. Las leemos, las clasificamos por proveedor y categoría fiscal, y las dejamos cargadas y listas para aprobar. Sin que nadie tipee un número.</p>
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px;flex-wrap:wrap">
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            <span style="padding:4px 8px;border-radius:6px;background:rgba(23,23,23,0.05);font-size:12px;color:#6B6B6B">#Facturas</span>
-            <span style="padding:4px 8px;border-radius:6px;background:rgba(23,23,23,0.05);font-size:12px;color:#6B6B6B">#AFIP</span>
-            <span style="padding:4px 8px;border-radius:6px;background:rgba(23,23,23,0.05);font-size:12px;color:#6B6B6B">#Aprobaciones</span>
-          </div>
-          <span class="r-bento-cta" style="font-size:12px;color:#BB1F1F;font-weight:500">Agendar →</span>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="r-bento r-bento-card r-bento-b i1" role="link" tabindex="0" onclick="goToBooking()" onkeydown="handleKeyBooking(event)" style="position:relative;overflow:hidden;border-radius:16px;border:1px solid rgba(23,23,23,0.08);background:rgba(255,255,255,0.8);padding:20px;display:flex;flex-direction:column;justify-content:space-between;min-height:160px;box-shadow:0 10px 40px rgba(23,23,23,0.04);cursor:pointer">
-        <div style="position:absolute;inset:0;z-index:-1;overflow:hidden;border-radius:16px">
-          <div style="position:absolute;inset:0;background:rgba(255,255,255,0.85)"></div>
-          <div style="position:absolute;inset:0;opacity:0.7;background: radial-gradient(ellipse 60% 120% at 12% 0%, rgba(187,31,31,0.14), transparent 72%)"></div>
-        </div>
-        <div class="r-bento-dots" style="position:absolute;inset:0;background-image: radial-gradient(circle at center, rgba(23,23,23,0.04) 1px, transparent 1px); background-size: 4px 4px;pointer-events:none"></div>
-        <div style="display:flex;align-items:center;gap:12px">
-          <div class="r-icon-2" style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;flex-shrink:0;border-radius:999px;border:1px solid rgba(23,23,23,0.12);background:#fff">
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><path d="M12 2.2v9.3m0 0-3.3-3.3M12 11.5l3.3-3.3" fill="none" stroke="#BB1F1F" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"></path><rect x="4" y="14" width="16" height="7" rx="2.6" fill="#BB1F1F"></rect><rect x="9.8" y="16.5" width="4.4" height="1.7" rx="0.85" fill="#fff"></rect></svg>
-          </div>
-          <h3 style="font-size:1rem;font-weight:600;text-transform:uppercase;letter-spacing:0.02em;color:#171717;margin:0">Procesamiento de documentos</h3>
-          <span style="margin-left:auto;border:1px solid rgba(23,23,23,0.10);padding:2px 8px;border-radius:999px;font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:#6B6B6B">DOCS</span>
-        </div>
-        <p style="margin:12px 0 0;font-size:0.9375rem;line-height:1.6;color:#3A3A3A">Contratos, remitos, certificados y planillas convertidos en datos estructurados y consultables.</p>
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;flex-wrap:wrap">
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            <span style="padding:4px 8px;border-radius:6px;background:rgba(23,23,23,0.05);font-size:12px;color:#6B6B6B">#OCR</span>
-            <span style="padding:4px 8px;border-radius:6px;background:rgba(23,23,23,0.05);font-size:12px;color:#6B6B6B">#Extracción</span>
-          </div>
-          <span class="r-bento-cta" style="font-size:12px;color:#BB1F1F;font-weight:500">Agendar →</span>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="r-bento r-bento-card r-bento-c i2" role="link" tabindex="0" onclick="goToBooking()" onkeydown="handleKeyBooking(event)" style="position:relative;overflow:hidden;border-radius:16px;border:1px solid rgba(23,23,23,0.08);background:rgba(255,255,255,0.8);padding:20px;display:flex;flex-direction:column;justify-content:space-between;min-height:160px;box-shadow:0 10px 40px rgba(23,23,23,0.04);cursor:pointer">
-        <div style="position:absolute;inset:0;z-index:-1;overflow:hidden;border-radius:16px">
-          <div style="position:absolute;inset:0;background:rgba(255,255,255,0.85)"></div>
-          <div style="position:absolute;inset:0;opacity:0.7;background: radial-gradient(ellipse 60% 120% at 12% 0%, rgba(187,31,31,0.14), transparent 72%)"></div>
-        </div>
-        <div class="r-bento-dots" style="position:absolute;inset:0;background-image: radial-gradient(circle at center, rgba(23,23,23,0.04) 1px, transparent 1px); background-size: 4px 4px;pointer-events:none"></div>
-        <div style="display:flex;align-items:center;gap:12px">
-          <div class="r-icon-3" style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;flex-shrink:0;border-radius:999px;border:1px solid rgba(23,23,23,0.12);background:#fff">
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="4" fill="#BB1F1F"></rect><polygon points="7,17 7,20.4 10.9,17" fill="#BB1F1F"></polygon><circle cx="8.3" cy="10.4" r="1.15" fill="#fff"></circle><circle cx="12" cy="10.4" r="1.15" fill="#fff"></circle><circle cx="15.7" cy="10.4" r="1.15" fill="#fff"></circle></svg>
-          </div>
-          <h3 style="font-size:1rem;font-weight:600;text-transform:uppercase;letter-spacing:0.02em;color:#171717;margin:0">CRM y seguimiento</h3>
-          <span style="margin-left:auto;border:1px solid rgba(23,23,23,0.10);padding:2px 8px;border-radius:999px;font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:#6B6B6B">CRM</span>
-        </div>
-        <p style="margin:12px 0 0;font-size:0.9375rem;line-height:1.6;color:#3A3A3A">Cada conversación queda registrada, enriquecida y con el próximo paso asignado. Nada se pierde en un chat.</p>
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;flex-wrap:wrap">
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            <span style="padding:4px 8px;border-radius:6px;background:rgba(23,23,23,0.05);font-size:12px;color:#6B6B6B">#Pipeline</span>
-            <span style="padding:4px 8px;border-radius:6px;background:rgba(23,23,23,0.05);font-size:12px;color:#6B6B6B">#Registro</span>
-          </div>
-          <span class="r-bento-cta" style="font-size:12px;color:#BB1F1F;font-weight:500">Agendar →</span>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="r-bento r-bento-card r-bento-d i3" role="link" tabindex="0" onclick="goToBooking()" onkeydown="handleKeyBooking(event)" style="position:relative;overflow:hidden;border-radius:16px;border:1px solid rgba(23,23,23,0.08);background:rgba(255,255,255,0.8);padding:20px;display:flex;flex-direction:column;justify-content:space-between;min-height:160px;box-shadow:0 10px 40px rgba(23,23,23,0.04);cursor:pointer">
-        <div style="position:absolute;inset:0;z-index:-1;overflow:hidden;border-radius:16px">
-          <div style="position:absolute;inset:0;background:rgba(255,255,255,0.85)"></div>
-          <div style="position:absolute;inset:0;opacity:0.7;background: radial-gradient(ellipse 60% 120% at 12% 0%, rgba(187,31,31,0.14), transparent 72%)"></div>
-        </div>
-        <div class="r-bento-dots" style="position:absolute;inset:0;background-image: radial-gradient(circle at center, rgba(23,23,23,0.04) 1px, transparent 1px); background-size: 4px 4px;pointer-events:none"></div>
-        <div style="display:flex;align-items:center;gap:12px">
-          <div class="r-icon-4" style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;flex-shrink:0;border-radius:999px;border:1px solid rgba(23,23,23,0.12);background:#fff">
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><circle cx="16" cy="8" r="2.7" fill="#BB1F1F" opacity="0.4"></circle><path d="M21 19c0-2.9-2.3-5.2-5.3-5.4" fill="#BB1F1F" opacity="0.4"></path><path d="M12.6 13.5c-2.9-2.6-9-1.4-9.5 3.5-.1.7.5 1.3 1.2 1.3h8.6" fill="#BB1F1F" opacity="0.4"></path><circle cx="9" cy="7.5" r="3.4" fill="#BB1F1F"></circle><path d="M3.4 19.8c.5-3.9 3.3-6 5.6-6s5.1 2.1 5.6 6c.1.7-.5 1.2-1.2 1.2H4.6c-.7 0-1.3-.5-1.2-1.2z" fill="#BB1F1F"></path></svg>
-          </div>
-          <h3 style="font-size:1rem;font-weight:600;text-transform:uppercase;letter-spacing:0.02em;color:#171717;margin:0">Sourcing y selección</h3>
-          <span style="margin-left:auto;border:1px solid rgba(23,23,23,0.10);padding:2px 8px;border-radius:999px;font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:#6B6B6B">RRHH</span>
-        </div>
-        <p style="margin:12px 0 0;font-size:0.9375rem;line-height:1.6;color:#3A3A3A">Los CV entran, se leen contra tu perfil de búsqueda y salen puntuados y ordenados. Vos entrevistás, no filtrás.</p>
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;flex-wrap:wrap">
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            <span style="padding:4px 8px;border-radius:6px;background:rgba(23,23,23,0.05);font-size:12px;color:#6B6B6B">#CVs</span>
-            <span style="padding:4px 8px;border-radius:6px;background:rgba(23,23,23,0.05);font-size:12px;color:#6B6B6B">#Scoring</span>
-          </div>
-          <span class="r-bento-cta" style="font-size:12px;color:#BB1F1F;font-weight:500">Agendar →</span>
-        </div>
-      </div>
-
-      <!-- Card 5 -->
-      <div class="r-bento r-bento-card r-bento-e i4" role="link" tabindex="0" onclick="goToBooking()" onkeydown="handleKeyBooking(event)" style="position:relative;overflow:hidden;border-radius:16px;border:1px solid rgba(23,23,23,0.08);background:rgba(255,255,255,0.8);padding:20px;display:flex;flex-direction:column;justify-content:space-between;min-height:160px;box-shadow:0 10px 40px rgba(23,23,23,0.04);cursor:pointer">
-        <div style="position:absolute;inset:0;z-index:-1;overflow:hidden;border-radius:16px">
-          <div style="position:absolute;inset:0;background:rgba(255,255,255,0.85)"></div>
-          <div style="position:absolute;inset:0;opacity:0.7;background: radial-gradient(ellipse 60% 120% at 12% 0%, rgba(187,31,31,0.14), transparent 72%)"></div>
-        </div>
-        <div class="r-bento-dots" style="position:absolute;inset:0;background-image: radial-gradient(circle at center, rgba(23,23,23,0.04) 1px, transparent 1px); background-size: 4px 4px;pointer-events:none"></div>
-        <div style="display:flex;align-items:center;gap:12px">
-          <div class="r-icon-5" style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;flex-shrink:0;border-radius:999px;border:1px solid rgba(23,23,23,0.12);background:#fff">
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><rect x="4" y="13" width="4" height="8" rx="1.7" fill="#BB1F1F"></rect><rect x="10" y="8" width="4" height="13" rx="1.7" fill="#BB1F1F"></rect><rect x="16" y="4" width="4" height="17" rx="1.7" fill="#BB1F1F"></rect></svg>
-          </div>
-          <h3 style="font-size:1rem;font-weight:600;text-transform:uppercase;letter-spacing:0.02em;color:#171717;margin:0">Reporting</h3>
-          <span style="margin-left:auto;border:1px solid rgba(23,23,23,0.10);padding:2px 8px;border-radius:999px;font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:#6B6B6B">DATA</span>
-        </div>
-        <p style="margin:12px 0 0;font-size:0.9375rem;line-height:1.6;color:#3A3A3A">Los números que hoy alguien arma a mano cada lunes, generados solos y siempre actualizados.</p>
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;flex-wrap:wrap">
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            <span style="padding:4px 8px;border-radius:6px;background:rgba(23,23,23,0.05);font-size:12px;color:#6B6B6B">#Dashboards</span>
-            <span style="padding:4px 8px;border-radius:6px;background:rgba(23,23,23,0.05);font-size:12px;color:#6B6B6B">#Automático</span>
-          </div>
-          <span class="r-bento-cta" style="font-size:12px;color:#BB1F1F;font-weight:500">Agendar →</span>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<!-- ==================== CÓMO TRABAJAMOS — ROADMAP ==================== -->
-<section id="proceso" aria-labelledby="proc-h2" class="r-section" style="position:relative;overflow:hidden">
-  <div class="r-notebook" aria-hidden="true"></div>
-  <div class="r-fade-left" aria-hidden="true"></div>
-  <div class="r-fade-right" aria-hidden="true"></div>
+<!-- 4. CÓMO SE VE -->
+<section id="como-se-ve" data-screen-label="04 Cómo se ve" style="padding:clamp(100px,12vw,168px) 0 0;scroll-margin-top:64px">
+  <div style="max-width:1120px;margin:0 auto;padding:0 20px">
+    <h2 data-reveal="" style="margin:0;max-width:820px;font-size:clamp(28px,3.6vw,44px);line-height:1.12;letter-spacing:-0.02em;font-weight:500;color:var(--muted);text-wrap:pretty"><span style="color:var(--ink);font-weight:600">Así trabaja un sistema de Renacimiento.</span> Sin pantallas nuevas que aprender: todo pasa donde tu equipo ya trabaja.</h2>
 
-  <div class="r-container" style="position:relative;z-index:1">
-    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;max-width:640px;margin:0 auto 48px">
-      <div class="r-eyebrow" style="color:#BB1F1F">PROCESO</div>
-      <h2 id="proc-h2" class="r-h2">Cinco pasos,&nbsp; <span class="r-bodoni" style="color: rgb(187, 31, 31); font-family: bondi; font-weight: 700;">cero sorpresas</span></h2>
-      <p style="font-size:1rem;line-height:1.65;color:#3A3A3A;margin:0">Prototipos en días, no meses. Si algo no funciona, lo matamos temprano y barato.</p>
+    <div style="margin-top:clamp(56px,7vw,96px);display:flex;flex-direction:column;gap:clamp(72px,9vw,128px)">
+
+      <!-- a) Postventa -->
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(28px,5vw,72px);align-items:center">
+        <div data-reveal="" style="flex:1 1 280px;max-width:380px;min-width:0">
+          
+          <h3 style="margin:14px 0 0;font-size:clamp(22px,2.2vw,28px);line-height:1.2;font-weight:600;letter-spacing:-0.02em">Postventa que se responde sola.</h3>
+          <p style="margin-top:12px;font-size:16px;line-height:1.5;color:var(--body);text-wrap:pretty">Lee el pedido, consulta el envío y contesta con el <strong style="color:var(--ink);font-weight:600">seguimiento real</strong>. Si la consulta es rara, pasa a una persona.</p>
+          <a href="#agenda" style="display:inline-flex;align-items:center;height:42px;padding:0 20px;margin-top:24px;border-radius:999px;background:var(--ink);color:var(--inv);font-size:14px;font-weight:500;transition:background 180ms" style-hover="background:#B4532F;color:var(--inv)">Agendar diagnóstico</a>
+        </div>
+        <div data-reveal="" style="flex:1.7 1 440px;min-width:0;border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg,var(--inv) 0%,var(--m5) 100%);padding:clamp(18px,4vw,48px);display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:center">
+          <div style="flex:1 1 260px;max-width:350px;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(14,14,16,0.28),0 2px 6px rgba(14,14,16,0.04)">
+            <div style="position:relative;display:flex;align-items:center;gap:8px;height:36px;padding:0 14px;background:var(--m1);border-bottom:1px solid var(--m2)"><span style="width:12px;height:12px;border-radius:50%;background:#FF5F57;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,0.14)"></span><span style="width:12px;height:12px;border-radius:50%;background:#FEBC2E;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,0.14)"></span><span style="width:12px;height:12px;border-radius:50%;background:#28C840;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,0.14)"></span><div style="position:absolute;left:72px;right:72px;text-align:center;font-size:12px;font-weight:500;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none">WhatsApp Business</div></div>
+            <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--m3)">
+              <div style="width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--inv);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex:none">FH</div>
+              <div style="min-width:0">
+                <div style="font-size:14px;font-weight:600;letter-spacing:-0.01em">Ferraro Hogar</div>
+                <div style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:#B4532F"></span>Asistente de postventa · en línea</div>
+              </div>
+            </div>
+            <div style="background:var(--m4);padding:16px 12px;display:flex;flex-direction:column;gap:8px;font-size:13.5px;line-height:1.4">
+              <div style="align-self:center;font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.06em;color:var(--muted);padding:2px 0 4px">HOY</div>
+              <div style="align-self:flex-start;max-width:84%;background:var(--surface);border-radius:12px 12px 12px 4px;padding:8px 10px 6px;box-shadow:0 1px 0 rgba(14,14,16,0.04)">Hola! ¿Dónde está mi pedido? Compré una cafetera el martes<div style="font-size:10.5px;color:var(--muted);text-align:right;margin-top:2px">10:42</div></div>
+              <div style="align-self:flex-end;max-width:86%;background:var(--m6);border-radius:12px 12px 4px 12px;padding:8px 10px 6px">¡Hola, Martina! Tu pedido <strong style="font-weight:600">#48213</strong> salió ayer del depósito. Te paso el seguimiento:
+                <div style="margin-top:8px;background:var(--surface);border-radius:8px;padding:10px;border:1px solid var(--m7)">
+                  <div style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.04em;color:var(--muted)">ANDREANI · 360002148917</div>
+                  <div style="margin-top:4px;font-weight:600">En camino</div>
+                  <div style="font-size:12px;color:var(--body)">Llega el jueves 9/10, de 9 a 18 h</div>
+                  <div style="margin-top:9px;display:grid;grid-template-columns:repeat(4,1fr);gap:3px">
+                    <div style="height:3px;border-radius:2px;background:var(--ink)"></div><div style="height:3px;border-radius:2px;background:var(--ink)"></div><div style="height:3px;border-radius:2px;background:var(--ink)"></div><div style="height:3px;border-radius:2px;background:var(--line)"></div>
+                  </div>
+                  <div style="margin-top:5px;display:grid;grid-template-columns:repeat(4,1fr);gap:3px;font-size:10px;color:var(--muted)"><span>Preparado</span><span>Despachado</span><span style="color:var(--ink)">En camino</span><span>Entregado</span></div>
+                </div>
+                <div style="font-size:10.5px;color:var(--m8);text-align:right;margin-top:4px">10:42 ✓✓</div>
+              </div>
+              <div style="align-self:flex-start;max-width:84%;background:var(--surface);border-radius:12px 12px 12px 4px;padding:8px 10px 6px">Genial, mil gracias!<div style="font-size:10.5px;color:var(--muted);text-align:right;margin-top:2px">10:43</div></div>
+              <div style="align-self:flex-end;max-width:86%;background:var(--m6);border-radius:12px 12px 4px 12px;padding:8px 10px 6px">De nada. Si cambia el estado, te aviso por acá.<div style="font-size:10.5px;color:var(--m8);text-align:right;margin-top:2px">10:43 ✓✓</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:10px 12px;border-top:1px solid var(--m3)">
+              <div style="flex:1;height:34px;border-radius:999px;background:var(--m4);display:flex;align-items:center;padding:0 14px;font-size:13px;color:var(--muted)">Escribí un mensaje</div>
+              <div style="width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--inv);display:flex;align-items:center;justify-content:center;font-size:14px">↑</div>
+            </div>
+          </div>
+          <div style="flex:0 1 200px;min-width:180px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 24px 48px -28px rgba(14,14,16,0.25)">
+            <div style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.06em;color:var(--muted)">ESTE MES</div>
+            <div style="margin-top:8px;font-size:44px;font-weight:600;letter-spacing:-0.04em;line-height:1">60%</div>
+            <div style="margin-top:8px;font-size:13px;line-height:1.4;color:var(--body)">de consultas resueltas sin intervención</div>
+            <div style="margin-top:14px;height:4px;border-radius:2px;background:var(--m3);overflow:hidden"><div style="width:60%;height:100%;background:var(--ink)"></div></div>
+            <div style="margin-top:8px;font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.04em;color:var(--muted)">1.248 CONSULTAS · 749 AUTO</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- b) Facturas -->
+      <div style="display:flex;flex-wrap:wrap;flex-direction:row-reverse;gap:clamp(28px,5vw,72px);align-items:center">
+        <div data-reveal="" style="flex:1 1 280px;max-width:380px;min-width:0">
+          
+          <h3 style="margin:14px 0 0;font-size:clamp(22px,2.2vw,28px);line-height:1.2;font-weight:600;letter-spacing:-0.02em">Facturas que se cargan solas.</h3>
+          <p style="margin-top:12px;font-size:16px;line-height:1.5;color:var(--body);text-wrap:pretty">Lee cada comprobante, valida el <strong style="color:var(--ink);font-weight:600">CUIT</strong> y lo categoriza. Vos aprobás lo que ya está listo.</p>
+          <a href="#agenda" style="display:inline-flex;align-items:center;height:42px;padding:0 20px;margin-top:24px;border-radius:999px;background:var(--ink);color:var(--inv);font-size:14px;font-weight:500;transition:background 180ms" style-hover="background:#B4532F;color:var(--inv)">Agendar diagnóstico</a>
+        </div>
+        <div data-reveal="" style="flex:1.7 1 440px;min-width:0;border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg,var(--inv) 0%,var(--m5) 100%);padding:clamp(18px,4vw,48px)">
+          <div style="background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(14,14,16,0.28),0 2px 6px rgba(14,14,16,0.04)">
+            <div style="position:relative;display:flex;align-items:center;gap:8px;height:36px;padding:0 14px;background:var(--m1);border-bottom:1px solid var(--m2)"><span style="width:12px;height:12px;border-radius:50%;background:#FF5F57;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,0.14)"></span><span style="width:12px;height:12px;border-radius:50%;background:#FEBC2E;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,0.14)"></span><span style="width:12px;height:12px;border-radius:50%;background:#28C840;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,0.14)"></span><div style="position:absolute;left:72px;right:72px;text-align:center;font-size:12px;font-weight:500;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none">Bandeja de facturas</div></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px">
+              <div style="min-width:0">
+                <div style="font-size:15px;font-weight:600;letter-spacing:-0.01em">Facturas a pagar</div>
+                <div style="margin-top:2px;font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.06em;color:var(--muted)">OCT 2026 · 18 NUEVAS</div>
+              </div>
+              <div style="flex:none;display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;background:var(--ink);color:var(--inv);font-size:13px;font-weight:500">Aprobar 12</div>
+            </div>
+            <div style="display:flex;gap:18px;padding:0 16px;border-bottom:1px solid var(--m3);font-size:12.5px">
+              <div style="padding:8px 0;border-bottom:1.5px solid var(--ink);font-weight:500">Todas <span style="color:var(--muted)">18</span></div>
+              <div style="padding:8px 0;color:var(--muted)">Listas 12</div>
+              <div style="padding:8px 0;color:var(--muted)">Revisar 6</div>
+            </div>
+            <div style="display:grid;grid-template-columns:16px minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--m9)">
+              <div style="width:14px;height:14px;border-radius:4px;background:var(--ink);color:var(--inv);font-size:9px;display:flex;align-items:center;justify-content:center">✓</div>
+              <div style="min-width:0"><div style="font-size:13.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Distribuidora Norte SRL</div><div style="font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">30-71234567-8 · MERCADERÍA</div></div>
+              <div style="text-align:right"><div style="font-size:13.5px;font-weight:500;font-variant-numeric:tabular-nums">$ 1.284.500,00</div><div style="font-size:11.5px;color:var(--body)">Lista para aprobar</div></div>
+            </div>
+            <div style="display:grid;grid-template-columns:16px minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--m9)">
+              <div style="width:14px;height:14px;border-radius:4px;background:var(--ink);color:var(--inv);font-size:9px;display:flex;align-items:center;justify-content:center">✓</div>
+              <div style="min-width:0"><div style="font-size:13.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Telecom Argentina SA</div><div style="font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">30-63945373-8 · SERVICIOS</div></div>
+              <div style="text-align:right"><div style="font-size:13.5px;font-weight:500;font-variant-numeric:tabular-nums">$ 86.420,15</div><div style="font-size:11.5px;color:var(--body)">Lista para aprobar</div></div>
+            </div>
+            <div style="display:grid;grid-template-columns:16px minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--m9);background:var(--card)">
+              <div style="width:14px;height:14px;border-radius:4px;border:1px solid var(--line2)"></div>
+              <div style="min-width:0"><div style="font-size:13.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Transportes Quilmes SA</div><div style="font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">30-68831904-2 · FLETES</div></div>
+              <div style="text-align:right"><div style="font-size:13.5px;font-weight:500;font-variant-numeric:tabular-nums">$ 212.900,00</div><div style="font-size:11.5px;color:var(--ink);display:inline-flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:#B4532F"></span>Revisar · difiere de la OC</div></div>
+            </div>
+            <div style="display:grid;grid-template-columns:16px minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--m9)">
+              <div style="width:14px;height:14px;border-radius:4px;background:var(--ink);color:var(--inv);font-size:9px;display:flex;align-items:center;justify-content:center">✓</div>
+              <div style="min-width:0"><div style="font-size:13.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Estudio Paz &amp; Asociados</div><div style="font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">30-70918273-4 · HONORARIOS</div></div>
+              <div style="text-align:right"><div style="font-size:13.5px;font-weight:500;font-variant-numeric:tabular-nums">$ 450.000,00</div><div style="font-size:11.5px;color:var(--body)">Lista para aprobar</div></div>
+            </div>
+            <div style="display:grid;grid-template-columns:16px minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:12px 16px">
+              <div style="width:14px;height:14px;border-radius:4px;background:var(--ink);color:var(--inv);font-size:9px;display:flex;align-items:center;justify-content:center">✓</div>
+              <div style="min-width:0"><div style="font-size:13.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Edenor SA</div><div style="font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">30-65511620-2 · SERVICIOS</div></div>
+              <div style="text-align:right"><div style="font-size:13.5px;font-weight:500;font-variant-numeric:tabular-nums">$ 143.780,40</div><div style="font-size:11.5px;color:var(--body)">Lista para aprobar</div></div>
+            </div>
+            <div style="padding:10px 16px;border-top:1px solid var(--m3);background:var(--card);font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.04em;color:var(--muted)">ORIGEN: 9 MAIL · 6 WHATSAPP · 3 PAPEL</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- c) Candidatos -->
+      
+
+      <!-- d) Reportes -->
+      <div style="display:flex;flex-wrap:wrap;flex-direction:row-reverse;gap:clamp(28px,5vw,72px);align-items:center">
+        <div data-reveal="" style="flex:1 1 280px;max-width:380px;min-width:0">
+          
+          <h3 style="margin:14px 0 0;font-size:clamp(22px,2.2vw,28px);line-height:1.2;font-weight:600;letter-spacing:-0.02em">Reportes que se arman solos.</h3>
+          <p style="margin-top:12px;font-size:16px;line-height:1.5;color:var(--body);text-wrap:pretty">Junta los números de tus planillas y sistemas, y el reporte <strong style="color:var(--ink);font-weight:600">sale solo</strong> cada domingo.</p>
+          <a href="#agenda" style="display:inline-flex;align-items:center;height:42px;padding:0 20px;margin-top:24px;border-radius:999px;background:var(--ink);color:var(--inv);font-size:14px;font-weight:500;transition:background 180ms" style-hover="background:#B4532F;color:var(--inv)">Agendar diagnóstico</a>
+        </div>
+        <div data-reveal="" style="flex:1.7 1 440px;min-width:0;border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg,var(--inv) 0%,var(--m5) 100%);padding:clamp(18px,4vw,48px);display:flex;flex-direction:column">
+          
+          <div style="align-self:flex-end;position:relative;z-index:2;margin-bottom:-18px;margin-right:clamp(-8px,-1vw,0px);display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--ink);color:var(--inv);border-radius:12px;box-shadow:0 16px 32px -16px rgba(14,14,16,0.5);max-width:100%">
+            <span style="width:18px;height:18px;border-radius:50%;border:1px solid var(--plate-label);display:flex;align-items:center;justify-content:center;font-size:10px;flex:none">✓</span>
+            <div style="min-width:0"><div style="font-size:13px;font-weight:500">Reporte semanal enviado a 12 clientes</div><div style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.06em;color:var(--muted)">DOM 5/10 · 21:00</div></div>
+          </div><div style="background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(14,14,16,0.28),0 2px 6px rgba(14,14,16,0.04)">
+            <div style="position:relative;display:flex;align-items:center;gap:8px;height:36px;padding:0 14px;background:var(--m1);border-bottom:1px solid var(--m2)"><span style="width:12px;height:12px;border-radius:50%;background:#FF5F57;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,0.14)"></span><span style="width:12px;height:12px;border-radius:50%;background:#FEBC2E;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,0.14)"></span><span style="width:12px;height:12px;border-radius:50%;background:#28C840;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,0.14)"></span><div style="position:absolute;left:72px;right:72px;text-align:center;font-size:12px;font-weight:500;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none">Resumen semanal</div></div>
+            <div style="padding:14px 16px 12px;display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+              <div style="font-size:15px;font-weight:600;letter-spacing:-0.01em">Resumen semanal</div>
+              <div style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.06em;color:var(--muted);white-space:nowrap">29/9 – 5/10</div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--m3);border-bottom:1px solid var(--m3)">
+              <div style="padding:12px 16px;border-right:1px solid var(--m3);min-width:0"><div style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.06em;color:var(--muted)">VENTAS</div><div style="margin-top:4px;font-size:clamp(16px,1.8vw,22px);font-weight:600;letter-spacing:-0.03em;white-space:nowrap">$ 18,4 M</div><div style="font-size:11.5px;color:var(--body)">↑ 12%</div></div>
+              <div style="padding:12px 16px;border-right:1px solid var(--m3);min-width:0"><div style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.06em;color:var(--muted)">PEDIDOS</div><div style="margin-top:4px;font-size:clamp(16px,1.8vw,22px);font-weight:600;letter-spacing:-0.03em">1.284</div><div style="font-size:11.5px;color:var(--body)">↑ 8%</div></div>
+              <div style="padding:12px 16px;min-width:0"><div style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.06em;color:var(--muted)">TICKET</div><div style="margin-top:4px;font-size:clamp(16px,1.8vw,22px);font-weight:600;letter-spacing:-0.03em;white-space:nowrap">$ 14.330</div><div style="font-size:11.5px;color:var(--body)">↓ 2%</div></div>
+            </div>
+            <div style="padding:18px 16px 12px">
+              <div style="position:relative;height:140px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;align-items:end;background-image:linear-gradient(var(--m9) 1px,transparent 1px);background-size:100% 35px">
+                <div style="height:46%;background:var(--m10);border-radius:4px 4px 0 0"></div>
+                <div style="height:58%;background:var(--m10);border-radius:4px 4px 0 0"></div>
+                <div style="height:52%;background:var(--m10);border-radius:4px 4px 0 0"></div>
+                <div style="height:71%;background:var(--m10);border-radius:4px 4px 0 0"></div>
+                <div style="height:88%;background:var(--ink);border-radius:4px 4px 0 0"></div>
+                <div style="height:79%;background:var(--m10);border-radius:4px 4px 0 0"></div>
+                <div style="height:40%;background:var(--m10);border-radius:4px 4px 0 0"></div>
+              </div>
+              <div style="margin-top:8px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.04em;color:var(--muted);text-align:center"><span>LU</span><span>MA</span><span>MI</span><span>JU</span><span style="color:var(--ink)">VI</span><span>SÁ</span><span>DO</span></div>
+            </div>
+            <div style="padding:10px 16px;border-top:1px solid var(--m3);background:var(--card);font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.04em;color:var(--muted)">FUENTES: TIENDA NUBE · MERCADO PAGO · SHEETS</div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="r-road-wrap">
-      <!-- Path SVG (md+) -->
-      <svg class="r-md-only" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0" viewBox="0 0 1000 1130" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M 290 150 C 500 150, 550 270, 710 270 C 850 270, 500 350, 290 450 C 290 600, 550 720, 750 720 C 950 720, 500 800, 290 850" stroke="#BB1F1F" stroke-width="2" stroke-dasharray="8 6" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke" opacity="0.55" style="animation: ren-dash 3s linear infinite"></path>
+<!-- 5. INTEGRACIONES -->
+<section data-screen-label="05 Integraciones" style="padding:clamp(100px,12vw,168px) 0 0">
+  <div style="max-width:1120px;margin:0 auto;padding:0 20px">
+    <h2 data-reveal="" style="margin:0;max-width:820px;font-size:clamp(28px,3.6vw,44px);line-height:1.12;letter-spacing:-0.02em;font-weight:500;color:var(--muted);text-wrap:pretty"><span style="color: var(--ink); font-weight: 600;">Se conecta con lo que ya usás.</span> No cambiás de sistema, lo hacemos trabajar mejor.</h2>
+    <div data-reveal="" style="position:relative;margin-top:clamp(48px,6vw,80px);aspect-ratio:5/2;min-height:300px">
+      <svg width="100%" height="100%" style="position:absolute;inset:0;overflow:visible" fill="none" stroke-width="1">
+        <g stroke="var(--line)">
+          <line x1="50%" y1="50%" x2="8.33%" y2="14%"></line><line x1="50%" y1="50%" x2="25%" y2="14%"></line><line x1="50%" y1="50%" x2="41.67%" y2="14%"></line><line x1="50%" y1="50%" x2="58.33%" y2="14%"></line><line x1="50%" y1="50%" x2="75%" y2="14%"></line><line x1="50%" y1="50%" x2="91.67%" y2="14%"></line>
+          <line x1="50%" y1="50%" x2="8.33%" y2="86%"></line><line x1="50%" y1="50%" x2="25%" y2="86%"></line><line x1="50%" y1="50%" x2="41.67%" y2="86%"></line><line x1="50%" y1="50%" x2="58.33%" y2="86%"></line><line x1="50%" y1="50%" x2="75%" y2="86%"></line><line x1="50%" y1="50%" x2="91.67%" y2="86%"></line>
+        </g>
+        <g stroke="var(--ink)" stroke-opacity="0.55" stroke-dasharray="7 93" stroke-dashoffset="100" stroke-linecap="round">
+          <line data-pulse="0" pathLength="100" x1="50%" y1="50%" x2="8.33%" y2="14%"></line><line data-pulse="1" pathLength="100" x1="50%" y1="50%" x2="25%" y2="14%"></line><line data-pulse="2" pathLength="100" x1="50%" y1="50%" x2="41.67%" y2="14%"></line><line data-pulse="3" pathLength="100" x1="50%" y1="50%" x2="58.33%" y2="14%"></line><line data-pulse="4" pathLength="100" x1="50%" y1="50%" x2="75%" y2="14%"></line><line data-pulse="5" pathLength="100" x1="50%" y1="50%" x2="91.67%" y2="14%"></line>
+          <line data-pulse="6" pathLength="100" x1="50%" y1="50%" x2="8.33%" y2="86%"></line><line data-pulse="7" pathLength="100" x1="50%" y1="50%" x2="25%" y2="86%"></line><line data-pulse="8" pathLength="100" x1="50%" y1="50%" x2="41.67%" y2="86%"></line><line data-pulse="9" pathLength="100" x1="50%" y1="50%" x2="58.33%" y2="86%"></line><line data-pulse="10" pathLength="100" x1="50%" y1="50%" x2="75%" y2="86%"></line><line data-pulse="11" pathLength="100" x1="50%" y1="50%" x2="91.67%" y2="86%"></line>
+        </g>
       </svg>
-
-      <!-- STEP 1 -->
-      <div class="r-proc r-proc-1">
-        <div style="background:#fff;padding:8px;border-radius:25px;box-shadow:0 10px 20px rgba(23,23,23,0.10);border:1px solid rgba(23,23,23,0.06)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#BB1F1F" style="width:32px;height:32px;margin:0 auto 16px;display:block" aria-hidden="true">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M16 3a1 1 0 0 1 .117 1.993l-.117 .007v4.764l1.894 3.789a1 1 0 0 1 .1 .331l.006 .116v2a1 1 0 0 1 -.883 .993l-.117 .007h-4v4a1 1 0 0 1 -1.993 .117l-.007 -.117v-4h-4a1 1 0 0 1 -.993 -.883l-.007 -.117v-2a1 1 0 0 1 .06 -.34l.046 -.107l1.894 -3.791v-4.762a1 1 0 0 1 -.117 -1.993l.117 -.007h8z"></path>
-          </svg>
-          <div style="background:rgba(187,31,31,0.05);border:1px solid rgba(187,31,31,0.14);border-radius:15px;padding:15px;position:relative;overflow:hidden">
-            <div style="font-family: bondi; font-style: italic; font-weight: 700; font-size: 4rem; line-height: 1; color: #BB1F1F; margin-bottom: 20px">01</div>
-            <h3 style="font-size:1.5rem;font-weight:600;line-height:1;margin:0 0 10px;color:#171717">Diagnóstico</h3>
-            <p style="font-size:0.875rem;line-height:1.35;letter-spacing:-0.01em;color:#5A5A5A;margin:0">Nos sentamos con tu equipo y mapeamos dónde se va el tiempo. No proponemos herramientas hasta entender qué proceso está roto.</p>
-          </div>
+      <sc-for list="{{ apps }}" as="a" hint-placeholder-count="12">
+        <div title="{{ a.name }}" style="position:absolute;left:{{ a.x }};top:{{ a.y }};transform:translate(-50%,-50%);width:clamp(42px,5.2vw,60px);height:clamp(42px,5.2vw,60px);border-radius:28%;background:var(--tile);border:1px solid var(--line);box-shadow:0 1px 2px rgba(14,14,16,0.04),0 8px 20px -14px rgba(14,14,16,0.2);display:flex;align-items:center;justify-content:center;font-size:clamp(12px,1.3vw,16px);font-weight:600;letter-spacing:-0.02em;color:{{ a.color }}">
+          <img src="{{ a.src }}" alt="{{ a.name }}" style="width:58%;height:58%;object-fit:contain;display:block">
+          <sc-if value="{{ showAppLabels }}" hint-placeholder-val="{{ true }}">
+            <span style="position: absolute; left: 50%; transform: translateX(-50%); top: {{ a.lt }}; bottom: {{ a.lb }}; font-family: Geist; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); white-space: nowrap; font-weight: 400">{{ a.name }}</span>
+          </sc-if>
         </div>
-      </div>
-      <!-- STEP 2 -->
-      <div class="r-proc r-proc-2">
-        <div style="background:#fff;padding:8px;border-radius:25px;box-shadow:0 10px 20px rgba(23,23,23,0.10);border:1px solid rgba(23,23,23,0.06)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#BB1F1F" style="width:32px;height:32px;margin:0 auto 16px;display:block" aria-hidden="true"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M16 3a1 1 0 0 1 .117 1.993l-.117 .007v4.764l1.894 3.789a1 1 0 0 1 .1 .331l.006 .116v2a1 1 0 0 1 -.883 .993l-.117 .007h-4v4a1 1 0 0 1 -1.993 .117l-.007 -.117v-4h-4a1 1 0 0 1 -.993 -.883l-.007 -.117v-2a1 1 0 0 1 .06 -.34l.046 -.107l1.894 -3.791v-4.762a1 1 0 0 1 -.117 -1.993l.117 -.007h8z"></path></svg>
-          <div style="background:#F5F2ED;border:1px solid rgba(23,23,23,0.07);border-radius:15px;padding:15px;position:relative;overflow:hidden">
-            <div style="font-family: bondi; font-style: italic; font-weight: 700; font-size: 4rem; line-height: 1; color: #BB1F1F; margin-bottom: 20px">02</div>
-            <h3 style="font-size:1.5rem;font-weight:600;line-height:1;margin:0 0 10px;color:#171717">Alcance y ROI</h3>
-            <p style="font-size:0.875rem;line-height:1.35;letter-spacing:-0.01em;color:#5A5A5A;margin:0">Elegimos un cuello de botella, calculamos cuántas horas cuesta hoy y definimos qué significa que la automatización funcione.</p>
-          </div>
-        </div>
-      </div>
-      <!-- STEP 3 -->
-      <div class="r-proc r-proc-3">
-        <div style="background:#fff;padding:8px;border-radius:25px;box-shadow:0 10px 20px rgba(23,23,23,0.10);border:1px solid rgba(23,23,23,0.06)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#BB1F1F" style="width:32px;height:32px;margin:0 auto 16px;display:block" aria-hidden="true"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M16 3a1 1 0 0 1 .117 1.993l-.117 .007v4.764l1.894 3.789a1 1 0 0 1 .1 .331l.006 .116v2a1 1 0 0 1 -.883 .993l-.117 .007h-4v4a1 1 0 0 1 -1.993 .117l-.007 -.117v-4h-4a1 1 0 0 1 -.993 -.883l-.007 -.117v-2a1 1 0 0 1 .06 -.34l.046 -.107l1.894 -3.791v-4.762a1 1 0 0 1 -.117 -1.993l.117 -.007h8z"></path></svg>
-          <div style="background:rgba(187,31,31,0.05);border:1px solid rgba(187,31,31,0.14);border-radius:15px;padding:15px;position:relative;overflow:hidden">
-            <div style="font-family: bondi; font-style: italic; font-weight: 700; font-size: 4rem; line-height: 1; color: #BB1F1F; margin-bottom: 20px">03</div>
-            <h3 style="font-size:1.5rem;font-weight:600;line-height:1;margin:0 0 10px;color:#171717">Prototipo</h3>
-            <p style="font-size:0.875rem;line-height:1.35;letter-spacing:-0.01em;color:#5A5A5A;margin:0">En días tenés un MVP con tus datos reales.</p>
-          </div>
-        </div>
-      </div>
-      <!-- STEP 4 -->
-      <div class="r-proc r-proc-4">
-        <div style="background:#fff;padding:8px;border-radius:25px;box-shadow:0 10px 20px rgba(23,23,23,0.10);border:1px solid rgba(23,23,23,0.06)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#BB1F1F" style="width:32px;height:32px;margin:0 auto 16px;display:block" aria-hidden="true"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M16 3a1 1 0 0 1 .117 1.993l-.117 .007v4.764l1.894 3.789a1 1 0 0 1 .1 .331l.006 .116v2a1 1 0 0 1 -.883 .993l-.117 .007h-4v4a1 1 0 0 1 -1.993 .117l-.007 -.117v-4h-4a1 1 0 0 1 -.993 -.883l-.007 -.117v-2a1 1 0 0 1 .06 -.34l.046 -.107l1.894 -3.791v-4.762a1 1 0 0 1 -.117 -1.993l.117 -.007h8z"></path></svg>
-          <div style="background:#F5F2ED;border:1px solid rgba(23,23,23,0.07);border-radius:15px;padding:15px;position:relative;overflow:hidden">
-            <div style="font-family: bondi; font-style: italic; font-weight: 700; font-size: 4rem; line-height: 1; color: #BB1F1F; margin-bottom: 20px">04</div>
-            <h3 style="font-size:1.5rem;font-weight:600;line-height:1;margin:0 0 10px;color:#171717">Implementación</h3>
-            <p style="font-size:0.875rem;line-height:1.35;letter-spacing:-0.01em;color:#5A5A5A;margin:0">Lo llevamos a producción, lo integramos con lo que ya usás y lo probamos con volumen real durante dos semanas.</p>
-          </div>
-        </div>
-      </div>
-      <!-- STEP 5 -->
-      <div class="r-proc r-proc-5">
-        <div style="background:#fff;padding:8px;border-radius:25px;box-shadow:0 10px 20px rgba(23,23,23,0.10);border:1px solid rgba(23,23,23,0.06)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#BB1F1F" style="width:32px;height:32px;margin:0 auto 16px;display:block" aria-hidden="true"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M16 3a1 1 0 0 1 .117 1.993l-.117 .007v4.764l1.894 3.789a1 1 0 0 1 .1 .331l.006 .116v2a1 1 0 0 1 -.883 .993l-.117 .007h-4v4a1 1 0 0 1 -1.993 .117l-.007 -.117v-4h-4a1 1 0 0 1 -.993 -.883l-.007 -.117v-2a1 1 0 0 1 .06 -.34l.046 -.107l1.894 -3.791v-4.762a1 1 0 0 1 -.117 -1.993l.117 -.007h8z"></path></svg>
-          <div style="background:rgba(187,31,31,0.05);border:1px solid rgba(187,31,31,0.14);border-radius:15px;padding:15px;position:relative;overflow:hidden">
-            <div style="font-family: bondi; font-style: italic; font-weight: 400; font-size: 4rem; line-height: 1; color: #BB1F1F; margin-bottom: 20px">05</div>
-            <h3 style="font-size:1.5rem;font-weight:600;line-height:1;margin:0 0 10px;color:#171717">Entrega y soporte</h3>
-            <p style="font-size:0.875rem;line-height:1.35;letter-spacing:-0.01em;color:#5A5A5A;margin:0">Entregamos la solución, y ofrecemos soporte y mantenimiento de las soluciones.</p>
-          </div>
-        </div>
+      </sc-for>
+      <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:clamp(60px,7vw,80px);height:clamp(60px,7vw,80px);border-radius:28%;background:var(--ink);display:flex;align-items:center;justify-content:center;box-shadow:0 20px 40px -18px rgba(14,14,16,0.5)">
+        <svg width="50%" height="50%" viewBox="0 0 32 32" fill="none" stroke="var(--inv)" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="7" width="13" height="21"></rect><rect x="19" y="14" width="8" height="14"></rect><line x1="3" y1="28" x2="29" y2="28"></line><rect x="9" y="11" width="2.5" height="2.5"></rect><rect x="13.5" y="11" width="2.5" height="2.5"></rect><rect x="9" y="16" width="2.5" height="2.5"></rect><rect x="13.5" y="16" width="2.5" height="2.5"></rect><rect x="11" y="22" width="3" height="6"></rect><rect x="22" y="18" width="2.5" height="2.5"></rect><rect x="22" y="22.5" width="2.5" height="2.5"></rect></svg>
+        <span style="position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);white-space:nowrap;padding:3px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:13px;font-weight:600;letter-spacing:-0.01em;color:var(--ink)">Tu empresa</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== AGENDAR REUNIÓN ==================== -->
-<section id="agendar" aria-labelledby="agendar-h2" class="r-section" style="background:#171717;position:relative;overflow:hidden;color:#fff">
-  <div aria-hidden="true" style="position:absolute;inset:0;background-image: linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 20px 20px; -webkit-mask-image: repeating-linear-gradient(to right, black 0px, black 3px, transparent 3px, transparent 8px), repeating-linear-gradient(to bottom, black 0px, black 3px, transparent 3px, transparent 8px); mask-image: repeating-linear-gradient(to right, black 0px, black 3px, transparent 3px, transparent 8px), repeating-linear-gradient(to bottom, black 0px, black 3px, transparent 3px, transparent 8px); -webkit-mask-composite: source-in; mask-composite: intersect; pointer-events:none;"></div>
-  <div aria-hidden="true" style="position:absolute;inset:0;background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(187,31,31,0.18), transparent 70%);pointer-events:none"></div>
-
-  <div class="r-container" style="position:relative;z-index:1">
-    <div class="r-agendar">
-      <div>
-        <div class="r-eyebrow" style="color:#D94A4A;margin-bottom:20px">AGENDAR</div>
-        <h2 id="agendar-h2" class="r-h2" style="color: #fff; margin-bottom: 20px; width: 416px; height: 204px">Treinta minutos para ahorrarte<br><span class="r-bodoni" style="color: rgb(217, 74, 74); font-family: bondi; font-weight: 700;">cientos de horas</span></h2>
-        <p class="r-lead" style="color:rgba(255,255,255,0.68);margin:0 0 32px;max-width:44ch">Una llamada de diagnóstico. Salís sabiendo qué proceso conviene atacar primero, y cuánto te está costando hoy.</p>
-        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px">
-          <li style="display:flex;align-items:flex-start;gap:12px">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D94A4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:2px;flex-shrink:0"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span style="font-size:15px;line-height:1.5;color:rgba(255,255,255,0.82)">30 minutos por videollamada</span>
-          </li>
-          <li style="display:flex;align-items:flex-start;gap:12px">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D94A4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:2px;flex-shrink:0"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span style="font-size:15px;line-height:1.5;color:rgba(255,255,255,0.82)">Sin costo y sin compromiso</span>
-          </li>
-          <li style="display:flex;align-items:flex-start;gap:12px">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D94A4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:2px;flex-shrink:0"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span style="font-size:15px;line-height:1.5;color:rgba(255,255,255,0.82)">Salís con un diagnóstico concreto<br></span>
-          </li>
-        </ul>
-      </div>
-
-      <div style="border-radius:16px;background:#fff;padding:8px;box-shadow:0 30px 80px rgba(0,0,0,0.35);min-height:620px;position:relative;overflow:hidden">
-        <!-- Cal.com mounts here when the section enters view -->
-        <div id="cal-inline" style="width:100%;height:100%;min-height:604px;position:relative">
-          <!-- Skeleton -->
-          <div class="r-cal-skel" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(23,23,23,0.03);border-radius:10px">
-            <div style="text-align:center;color:#6B6B6B;font-size:13px;letter-spacing:0.1em;text-transform:uppercase">Cargando calendario</div>
+<!-- 6. PROCESO -->
+<section id="proceso" data-screen-label="06 Proceso" style="padding:clamp(100px,12vw,168px) 0 0;scroll-margin-top:64px">
+  <div style="max-width:1120px;margin:0 auto;padding:0 20px">
+    <h2 data-reveal="" style="margin:0;max-width:820px;font-size:clamp(28px,3.6vw,44px);line-height:1.12;letter-spacing:-0.02em;font-weight:500;color:var(--muted);text-wrap:pretty"><span style="color: var(--ink); font-weight: 600;">Cinco pasos, cero sorpresas.</span> Prototipos en días, no en meses.</h2>
+    <div data-route="" style="position:relative;margin-top:clamp(48px,6vw,80px)">
+      <div data-route-line="" style="position:absolute;left:{{ rt.lineLeft }};top:52px;bottom:52px;width:1px;background-image:repeating-linear-gradient(180deg,var(--line2) 0 4px,transparent 4px 9px)"></div>
+      <div data-route-fill="" style="position:absolute;left:{{ rt.lineLeft }};top:52px;width:1px;height:0px;background:var(--ink)"></div>
+      <div style="position:relative;display:flex;justify-content:{{ rt.jl }};margin-top:0px">
+        <div data-reveal="" data-route-node="" style="position:absolute;left:{{ rt.nodeLeft }};top:32px;z-index:2;transition:background 300ms ease, color 300ms ease, border-color 300ms ease;width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.06em;color:var(--ink)">01</div>
+        <article data-reveal="" style="width:{{ rt.cardW }};min-width:0;padding:8px;border:1px solid var(--line);border-radius:16px;background:var(--card);transition:border-color 200ms ease, transform 200ms ease" style-hover="border-color:var(--line2);transform:translateY(-2px)">
+          <!-- HAIRLINE: lupa -->
+          <div data-plate="" style="position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background-color:var(--plate);background-image:radial-gradient(var(--plate-dot) 1px, transparent 1.2px);background-size:18px 18px;background-position:9px 9px">
+            <div data-tilt="" style="position:absolute;inset:0;will-change:transform">
+<div data-fig="lupa" style="position:absolute;top:0;bottom:0;left:50%;height:100%;aspect-ratio:5/4;transform:translateX(-50%);pointer-events:none"></div></div>
           </div>
-        </div>
+          <div style="padding:20px 12px 14px">
+            <h3 style="margin:0;font-size:19px;font-weight:600;letter-spacing:-0.02em">Diagnóstico</h3>
+            <p style="margin-top:6px;font-size:15px;line-height:1.45;color:var(--body);text-wrap:pretty">Mapeamos dónde se va el tiempo antes de proponer cualquier herramienta.</p>
+          </div>
+        </article>
+      </div>
+      <div style="position:relative;display:flex;justify-content:flex-end;margin-top:{{ rt.mt }}">
+        <div data-reveal="" data-route-node="" style="position:absolute;left:{{ rt.nodeLeft }};top:32px;z-index:2;transition:background 300ms ease, color 300ms ease, border-color 300ms ease;width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.06em;color:var(--ink)">02</div>
+        <article data-reveal="" style="width:{{ rt.cardW }};min-width:0;padding:8px;border:1px solid var(--line);border-radius:16px;background:var(--card);transition:border-color 200ms ease, transform 200ms ease" style-hover="border-color:var(--line2);transform:translateY(-2px)">
+          <!-- HAIRLINE: monedas -->
+          <div data-plate="" style="position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background-color:var(--plate);background-image:radial-gradient(var(--plate-dot) 1px, transparent 1.2px);background-size:18px 18px;background-position:9px 9px">
+            <div data-tilt="" style="position:absolute;inset:0;will-change:transform">
+<div data-fig="monedas" style="position:absolute;top:0;bottom:0;left:50%;height:100%;aspect-ratio:5/4;transform:translateX(-50%);pointer-events:none"></div></div>
+          </div>
+          <div style="padding:20px 12px 14px">
+            <h3 style="margin:0;font-size:19px;font-weight:600;letter-spacing:-0.02em">Alcance y ROI</h3>
+            <p style="margin-top:6px;font-size:15px;line-height:1.45;color:var(--body);text-wrap:pretty">Elegimos un cuello de botella y calculamos <strong style="color:var(--ink);font-weight:600">cuánto te cuesta hoy</strong>.</p>
+          </div>
+        </article>
+      </div>
+      <div style="position:relative;display:flex;justify-content:{{ rt.jl }};margin-top:{{ rt.mt }}">
+        <div data-reveal="" data-route-node="" style="position:absolute;left:{{ rt.nodeLeft }};top:32px;z-index:2;transition:background 300ms ease, color 300ms ease, border-color 300ms ease;width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.06em;color:var(--ink)">03</div>
+        <article data-reveal="" style="width:{{ rt.cardW }};min-width:0;padding:8px;border:1px solid var(--line);border-radius:16px;background:var(--card);transition:border-color 200ms ease, transform 200ms ease" style-hover="border-color:var(--line2);transform:translateY(-2px)">
+          <!-- HAIRLINE: prototipo -->
+          <div data-plate="" style="position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background-color:var(--plate);background-image:radial-gradient(var(--plate-dot) 1px, transparent 1.2px);background-size:18px 18px;background-position:9px 9px">
+            <div data-tilt="" style="position:absolute;inset:0;will-change:transform">
+<div data-fig="prototipo" style="position:absolute;top:0;bottom:0;left:50%;height:100%;aspect-ratio:5/4;transform:translateX(-50%);pointer-events:none"></div></div>
+          </div>
+          <div style="padding:20px 12px 14px">
+            <h3 style="margin:0;font-size:19px;font-weight:600;letter-spacing:-0.02em">Prototipo</h3>
+            <p style="margin-top:6px;font-size:15px;line-height:1.45;color:var(--body);text-wrap:pretty">En días tenés un MVP funcionando con <strong style="color:var(--ink);font-weight:600">tus datos reales</strong>.</p>
+          </div>
+        </article>
+      </div>
+      <div style="position:relative;display:flex;justify-content:flex-end;margin-top:{{ rt.mt }}">
+        <div data-reveal="" data-route-node="" style="position:absolute;left:{{ rt.nodeLeft }};top:32px;z-index:2;transition:background 300ms ease, color 300ms ease, border-color 300ms ease;width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.06em;color:var(--ink)">04</div>
+        <article data-reveal="" style="width:{{ rt.cardW }};min-width:0;padding:8px;border:1px solid var(--line);border-radius:16px;background:var(--card);transition:border-color 200ms ease, transform 200ms ease" style-hover="border-color:var(--line2);transform:translateY(-2px)">
+          <!-- HAIRLINE: cubos -->
+          <div data-plate="" style="position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background-color:var(--plate);background-image:radial-gradient(var(--plate-dot) 1px, transparent 1.2px);background-size:18px 18px;background-position:9px 9px">
+            <div data-tilt="" style="position:absolute;inset:0;will-change:transform">
+<div data-fig="cubos" style="position:absolute;top:0;bottom:0;left:50%;height:100%;aspect-ratio:5/4;transform:translateX(-50%);pointer-events:none"></div></div>
+          </div>
+          <div style="padding:20px 12px 14px">
+            <h3 style="margin:0;font-size:19px;font-weight:600;letter-spacing:-0.02em">Implementación</h3>
+            <p style="margin-top:6px;font-size:15px;line-height:1.45;color:var(--body);text-wrap:pretty">Lo integramos a lo que ya usás y lo probamos con volumen real.</p>
+          </div>
+        </article>
+      </div>
+      <div style="position:relative;display:flex;justify-content:{{ rt.jl }};margin-top:{{ rt.mt }}">
+        <div data-reveal="" data-route-node="" style="position:absolute;left:{{ rt.nodeLeft }};top:32px;z-index:2;transition:background 300ms ease, color 300ms ease, border-color 300ms ease;width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.06em;color:var(--ink)">05</div>
+        <article data-reveal="" style="width:{{ rt.cardW }};min-width:0;padding:8px;border:1px solid var(--line);border-radius:16px;background:var(--card);transition:border-color 200ms ease, transform 200ms ease" style-hover="border-color:var(--line2);transform:translateY(-2px)">
+          <!-- HAIRLINE: envio -->
+          <div data-plate="" style="position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background-color:var(--plate);background-image:radial-gradient(var(--plate-dot) 1px, transparent 1.2px);background-size:18px 18px;background-position:9px 9px">
+            <div data-tilt="" style="position:absolute;inset:0;will-change:transform">
+<div data-fig="envio" style="position:absolute;top:0;bottom:0;left:50%;height:100%;aspect-ratio:5/4;transform:translateX(-50%);pointer-events:none"></div></div>
+          </div>
+          <div style="padding:20px 12px 14px">
+            <h3 style="margin:0;font-size:19px;font-weight:600;letter-spacing:-0.02em">Entrega y soporte</h3>
+            <p style="margin-top:6px;font-size:15px;line-height:1.45;color:var(--body);text-wrap:pretty">Te queda documentado, y te acompañamos con el <strong style="color:var(--ink);font-weight:600">mantenimiento</strong>.</p>
+          </div>
+        </article>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== TESTIMONIOS ==================== -->
-<section aria-labelledby="test-h2" class="r-section" style="background:#F5F2ED">
-  <div class="r-container">
-    <div class="r-reveal" style="display:flex;flex-direction:column;align-items:center;gap:20px;max-width:540px;margin:0 auto;text-align:center">
-      <div style="border:1px solid rgba(23,23,23,0.12);padding:6px 16px;border-radius:8px;font-size:12px;text-transform:uppercase;letter-spacing:0.2em;color:#6B6B6B">Testimonios</div>
-      <h2 id="test-h2" class="r-h2">Lo que dicen los que ya <span class="r-bodoni" style="color: #BB1F1F; font-family: bondi; text-decoration-line: none; font-style: italic; font-weight: 700">lo hicieron</span></h2>
-      <p style="opacity:0.75;font-size:1rem;line-height:1.65;color:#3A3A3A;margin:0">Empresas que dejaron de hacer a mano lo que la IA podia hacer.</p>
-    </div>
+<!-- 7. RUBROS -->
 
-    <div class="r-testimonials r-marquee-cols">
-      <div style="flex:1;max-width:320px">
-        <div class="r-marquee-track" style="--dur:15s;display:flex;flex-direction:column;gap:24px;padding-bottom:24px">
-                      <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">Antes cerrábamos el mes dedicando dos días completos a cargar facturas. Hoy el sistema las procesa solo y el equipo revisa excepciones.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">OT</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Octavio Tuccilo</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">Dueño 38Special</div>
-                </div>
-              </div>
-            </article>
-            <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">El diagnóstico duró treinta minutos y nos dijeron cuál era el proceso que mas nos estaba costando.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">OT</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Octavio Tuccilo</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">Dueño 38Special</div>
-                </div>
-              </div>
-            </article>
-            <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">En dos semanas teníamos un prototipo funcionando con nuestros datos reales. En un mes estaba en producción con volumen de verdad.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">OT</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Octavio Tuccilo</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">Dueño 38Special</div>
-                </div>
-              </div>
-            </article>
-            <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">Antes cerrábamos el mes dedicando dos días completos a cargar facturas. Hoy el sistema las procesa solo y el equipo revisa excepciones.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">OT</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Octavio Tuccilo</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">Dueño 38Special</div>
-                </div>
-              </div>
-            </article>
-            <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">El diagnóstico duró treinta minutos y nos dijeron cuál era el proceso que mas nos estaba costando.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">OT</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Octavio Tuccilo</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">Dueño 38Special</div>
-                </div>
-              </div>
-            </article>
-            <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">En dos semanas teníamos un prototipo funcionando con nuestros datos reales. En un mes estaba en producción con volumen de verdad.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">OT</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Octavio Tuccilo</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">Dueño 38Special</div>
-                </div>
-              </div>
-            </article>
-        </div>
-      </div>
-      <div class="r-tcol-md" style="flex:1;max-width:320px">
-        <div class="r-marquee-track" style="--dur:19s;display:flex;flex-direction:column;gap:24px;padding-bottom:24px">
-                      <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">Reemplazamos tres planillas de Excel por un flujo automático. Lo que nos daba trabajo los lunes ahora está listo el domingo a la noche.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">LA</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Laura Dellacasa</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">Socia Dellacasa &amp; Castillo</div>
-                </div>
-              </div>
-            </article>
-            <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">Lo bueno es que nos entregaron todo documentado. Cuando quisimos ajustar una regla, la ajustamos nosotros sin llamarlos.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">LA</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Laura Dellacasa</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">Socia Dellacasa &amp; Castillo</div>
-                </div>
-              </div>
-            </article>
-            <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">Automatizamos el reporting mensual de doce clientes. Tres días de trabajo se convirtieron en un botón y un PDF con la marca de cada uno.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">LA</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Laura Dellacasa</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">Socia Dellacasa &amp; Castillo</div>
-                </div>
-              </div>
-            </article>
-            <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">Reemplazamos tres planillas de Excel por un flujo automático. Lo que nos daba trabajo los lunes ahora está listo el domingo a la noche.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">LA</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Laura Dellacasa</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">Socia Dellacasa &amp; Castillo</div>
-                </div>
-              </div>
-            </article>
-            <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">Lo bueno es que nos entregaron todo documentado. Cuando quisimos ajustar una regla, la ajustamos nosotros sin llamarlos.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">LA</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Laura Dellacasa</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">Socia Dellacasa &amp; Castillo</div>
-                </div>
-              </div>
-            </article>
-            <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">Automatizamos el reporting mensual de doce clientes. Tres días de trabajo se convirtieron en un botón y un PDF con la marca de cada uno.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">LA</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Laura Dellacasa</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">Socia Dellacasa &amp; Castillo</div>
-                </div>
-              </div>
-            </article>
-        </div>
-      </div>
-      <div class="r-tcol-lg" style="flex:1;max-width:320px">
-        <div class="r-marquee-track" style="--dur:17s;display:flex;flex-direction:column;gap:24px;padding-bottom:24px">
-                      <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">El equipo dejó de filtrar CVs a mano. Los candidatos llegan puntuados contra el perfil y las entrevistas tienen mucha más señal.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">MI</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Martina Ibáñez</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">CEO · Núcleo Consultora</div>
-                </div>
-              </div>
-            </article>
-            <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">El primer prototipo no funcionaba y lo dijeron ellos antes que nosotros. Cambiamos de enfoque en la misma semana y salvamos meses.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">MI</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Martina Ibáñez</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">CEO · Núcleo Consultora</div>
-                </div>
-              </div>
-            </article>
-            <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">Lo importante no es que 'usen IA'. Lo importante es que el proceso deja de comerse el tiempo de la gente que debería estar pensando otra cosa.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">MI</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Martina Ibáñez</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">CEO · Núcleo Consultora</div>
-                </div>
-              </div>
-            </article>
-            <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">El equipo dejó de filtrar CVs a mano. Los candidatos llegan puntuados contra el perfil y las entrevistas tienen mucha más señal.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">MI</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Martina Ibáñez</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">CEO · Núcleo Consultora</div>
-                </div>
-              </div>
-            </article>
-            <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">El primer prototipo no funcionaba y lo dijeron ellos antes que nosotros. Cambiamos de enfoque en la misma semana y salvamos meses.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">MI</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Martina Ibáñez</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">CEO · Núcleo Consultora</div>
-                </div>
-              </div>
-            </article>
-            <article style="padding:40px;border-radius:24px;border:1px solid rgba(23,23,23,0.08);background:#fff;box-shadow:0 10px 40px rgba(187,31,31,0.06);max-width:320px;width:100%">
-              <div style="font-family:var(--font-display);font-style:italic;font-size:44px;line-height:0.6;color:rgba(187,31,31,0.22);margin-bottom:12px">"</div>
-              <p style="font-size:15px;line-height:1.6;color:#3A3A3A;margin:0">Lo importante no es que 'usen IA'. Lo importante es que el proceso deja de comerse el tiempo de la gente que debería estar pensando otra cosa.</p>
-              <div style="display:flex;align-items:center;gap:12px;margin-top:20px">
-                <div style="width:40px;height:40px;border-radius:8px;background:rgba(187,31,31,0.08);border:1px solid rgba(187,31,31,0.16);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#BB1F1F">MI</div>
-                <div style="min-width:0">
-                  <div style="font-weight:500;letter-spacing:-0.01em;line-height:1.25;color:#171717">Martina Ibáñez</div>
-                  <div style="line-height:1.25;opacity:0.6;letter-spacing:-0.01em;font-size:14px">CEO · Núcleo Consultora</div>
-                </div>
-              </div>
-            </article>
-        </div>
-      </div>
+
+<!-- 8. TESTIMONIOS -->
+<!-- TESTIMONIOS: reemplazar con citas reales -->
+
+
+<!-- 9. CTA FINAL + AGENDA -->
+<section id="agenda" data-screen-label="09 Agenda" style="padding:clamp(100px,12vw,168px) 0 0;scroll-margin-top:64px">
+  <div style="max-width:1120px;margin:0 auto;padding:0 20px">
+    <h2 data-reveal="" style="margin:0 auto;max-width:800px;text-align:center;font-size:clamp(30px,4vw,52px);line-height:1.1;letter-spacing:-0.02em;font-weight:500;color:var(--muted);text-wrap:balance"><span style="color: var(--ink); font-weight: 600;">Treinta minutos para ahorrarte cientos de horas.</span>&nbsp;</h2>
+    <div data-reveal="" style="margin-top:32px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px 28px;font-size:14.5px;color:var(--body)">
+      <span style="display:inline-flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="var(--ink)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,7.5 5.5,11 12,3.5"></polyline></svg>30 minutos por videollamada</span>
+      <span style="display:inline-flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="var(--ink)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,7.5 5.5,11 12,3.5"></polyline></svg>Sin costo ni compromiso</span>
+      <span style="display:inline-flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="var(--ink)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,7.5 5.5,11 12,3.5"></polyline></svg>Diagnóstico concreto</span>
+    </div>
+    <!-- EMBED CALENDARIO -->
+    <div data-reveal="" style="margin-top:clamp(40px,5vw,64px);height:680px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card)">
+      <iframe src="{{ calSrc }}" title="Agendar diagnóstico" loading="lazy" style="width:100%;height:100%;border:0;display:block"></iframe>
     </div>
   </div>
 </section>
 
-<!-- ==================== SERVICIOS POR RUBRO ==================== -->
-
-
-<!-- ==================== FOOTER ==================== -->
-<section id="servicios" aria-labelledby="srv-h2" class="r-section r-srv-section" style="padding-bottom: 40px">
-  <div class="r-container">
-    
-
-    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;max-width:640px;margin:0 auto 48px">
-      <div class="r-eyebrow" style="color:#BB1F1F">SERVICIOS POR RUBRO</div>
-      <h2 id="srv-h2" class="r-h2">El mismo motor, <span class="r-bodoni" style="color: #BB1F1F; font-weight: 700; font-family: bondi">distinto problema</span></h2>
-      <p style="font-size:1rem;line-height:1.65;color:#3A3A3A;margin:0">Cada industria tiene su propio cuello de botella. Estos son los que más vemos.</p>
-    </div><div class="r-services">
-      <!-- I -->
-      <div class="r-srv r-srv-card i0" role="link" tabindex="0" onclick="goToBooking()" onkeydown="handleKeyBooking(event)" style="background:#fff;border:1px solid rgba(23,23,23,0.08);border-radius:16px;padding:28px;cursor:pointer;display:flex;flex-direction:column">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid rgba(23,23,23,0.08)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#BB1F1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path><path d="M17 18h1"></path><path d="M12 18h1"></path><path d="M7 18h1"></path></svg>
-          <span style="font-family:var(--font-display);font-style:italic;font-size:14px;color:rgba(23,23,23,0.28)">I</span>
-        </div>
-        <h3 style="font-size:19px;font-weight:600;margin:20px 0 12px;color:#171717">Petróleo y gas</h3>
-        <p style="font-size:14px;line-height:1.6;color:#3A3A3A;margin:0">Operaciones con alto volumen documental: certificaciones, órdenes de servicio y facturación de proveedores.</p>
-        <div style="background:#F5F2ED;border-left:2px solid #BB1F1F;border-radius:0 8px 8px 0;padding:14px 16px;margin-top:20px">
-          <div style="font-family:var(--font-display);font-style:italic;font-size:13px;letter-spacing:0.05em;color:#BB1F1F;font-weight:700;margin-bottom:6px">Ejemplo</div>
-          <div style="font-size:13px;line-height:1.55;color:#3A3A3A">Una operadora recibía 400 facturas de proveedores por mes en cinco formatos distintos. Hoy entran solas, clasificadas por centro de costo y listas para aprobar.</div>
-        </div>
-      </div>
-      <!-- II -->
-      <div class="r-srv r-srv-card i1" role="link" tabindex="0" onclick="goToBooking()" onkeydown="handleKeyBooking(event)" style="background:#fff;border:1px solid rgba(23,23,23,0.08);border-radius:16px;padding:28px;cursor:pointer;display:flex;flex-direction:column">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid rgba(23,23,23,0.08)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#BB1F1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"></path><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path></svg>
-          <span style="font-family:var(--font-display);font-style:italic;font-size:14px;color:rgba(23,23,23,0.28)">II</span>
-        </div>
-        <h3 style="font-size:19px;font-weight:600;margin:20px 0 12px;color:#171717">Agencias de marketing</h3>
-        <p style="font-size:14px;line-height:1.6;color:#3A3A3A;margin:0">Reporting multi-cliente y coordinación de contenido, dos tareas que consumen horas facturables sin generarlas.</p>
-        <div style="background:#F5F2ED;border-left:2px solid #BB1F1F;border-radius:0 8px 8px 0;padding:14px 16px;margin-top:20px">
-          <div style="font-family:var(--font-display);font-style:italic;font-size:13px;letter-spacing:0.05em;color:#BB1F1F;font-weight:700;margin-bottom:6px">Ejemplo</div>
-          <div style="font-size:13px;line-height:1.55;color:#3A3A3A">Reportes mensuales que llevaban días, en solo minutos</div>
-        </div>
-      </div>
-      <!-- III -->
-      <div class="r-srv r-srv-card i2" role="link" tabindex="0" onclick="goToBooking()" onkeydown="handleKeyBooking(event)" style="background:#fff;border:1px solid rgba(23,23,23,0.08);border-radius:16px;padding:28px;cursor:pointer;display:flex;flex-direction:column">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid rgba(23,23,23,0.08)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#BB1F1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
-          <span style="font-family:var(--font-display);font-style:italic;font-size:14px;color:rgba(23,23,23,0.28)">III</span>
-        </div>
-        <h3 style="font-size:19px;font-weight:600;margin:20px 0 12px;color:#171717">Estudios contables</h3>
-        <p style="font-size:14px;line-height:1.6;color:#3A3A3A;margin:0">Carga de comprobantes, control de categorías y conciliación, sin tipear.</p>
-        <div style="background:#F5F2ED;border-left:2px solid #BB1F1F;border-radius:0 8px 8px 0;padding:14px 16px;margin-top:20px">
-          <div style="font-family:var(--font-display);font-style:italic;font-size:13px;letter-spacing:0.05em;color:#BB1F1F;font-weight:700;margin-bottom:6px">Ejemplo</div>
-          <div style="font-size:13px;line-height:1.55;color:#3A3A3A">Los comprobantes de los clientes se leen, se validan contra la categoría de Monotributo y se cargan al sistema sin intervención manual.</div>
-        </div>
-      </div>
-      <!-- IV -->
-      <div class="r-srv r-srv-card i3" role="link" tabindex="0" onclick="goToBooking()" onkeydown="handleKeyBooking(event)" style="background:#fff;border:1px solid rgba(23,23,23,0.08);border-radius:16px;padding:28px;cursor:pointer;display:flex;flex-direction:column">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid rgba(23,23,23,0.08)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#BB1F1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
-          <span style="font-family:var(--font-display);font-style:italic;font-size:14px;color:rgba(23,23,23,0.28)">IV</span>
-        </div>
-        <h3 style="font-size:19px;font-weight:600;margin:20px 0 12px;color:#171717">Salud y compliance</h3>
-        <p style="font-size:14px;line-height:1.6;color:#3A3A3A;margin:0">Revisión documental contra normativa, con trazabilidad de cada decisión.</p>
-        <div style="background:#F5F2ED;border-left:2px solid #BB1F1F;border-radius:0 8px 8px 0;padding:14px 16px;margin-top:20px">
-          <div style="font-family:var(--font-display);font-style:italic;font-size:13px;letter-spacing:0.05em;color:#BB1F1F;font-weight:700;margin-bottom:6px">Ejemplo</div>
-          <div style="font-size:13px;line-height:1.55;color:#3A3A3A">Un legajo de habilitación que llevaba dos horas de revisión manual queda pre-revisado en minutos, con las inconsistencias señaladas.</div>
-        </div>
-      </div>
-      <!-- V -->
-      <div class="r-srv r-srv-card i4" role="link" tabindex="0" onclick="goToBooking()" onkeydown="handleKeyBooking(event)" style="background:#fff;border:1px solid rgba(23,23,23,0.08);border-radius:16px;padding:28px;cursor:pointer;display:flex;flex-direction:column">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid rgba(23,23,23,0.08)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#BB1F1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17h4V5H2v12h3"></path><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5v8h1"></path><circle cx="7.5" cy="17.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>
-          <span style="font-family:var(--font-display);font-style:italic;font-size:14px;color:rgba(23,23,23,0.28)">V</span>
-        </div>
-        <h3 style="font-size:19px;font-weight:600;margin:20px 0 12px;color:#171717">Logística y distribución</h3>
-        <p style="font-size:14px;line-height:1.6;color:#3A3A3A;margin:0">Remitos, seguimiento de entregas y comunicación con clientes, coordinados en un solo flujo.</p>
-        <div style="background:#F5F2ED;border-left:2px solid #BB1F1F;border-radius:0 8px 8px 0;padding:14px 16px;margin-top:20px">
-          <div style="font-family:var(--font-display);font-style:italic;font-size:13px;letter-spacing:0.05em;color:#BB1F1F;font-weight:700;margin-bottom:6px">Ejemplo</div>
-          <div style="font-size:13px;line-height:1.55;color:#3A3A3A">Los remitos firmados se digitalizan al llegar y disparan solos el aviso al cliente y la actualización del sistema.</div>
-        </div>
-      </div>
-      <!-- VI -->
-      <div class="r-srv r-srv-card i5" role="link" tabindex="0" onclick="goToBooking()" onkeydown="handleKeyBooking(event)" style="background:#fff;border:1px solid rgba(23,23,23,0.08);border-radius:16px;padding:28px;cursor:pointer;display:flex;flex-direction:column">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid rgba(23,23,23,0.08)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#BB1F1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-          <span style="font-family:var(--font-display);font-style:italic;font-size:14px;color:rgba(23,23,23,0.28)">VI</span>
-        </div>
-        <h3 style="font-size:19px;font-weight:600;margin:20px 0 12px;color:#171717">Retail y e-commerce</h3>
-        <p style="font-size:14px;line-height:1.6;color:#3A3A3A;margin:0">Postventa, stock y atención repetitiva, resueltos antes de que lleguen a una persona.</p>
-        <div style="background:#F5F2ED;border-left:2px solid #BB1F1F;border-radius:0 8px 8px 0;padding:14px 16px;margin-top:20px">
-          <div style="font-family:var(--font-display);font-style:italic;font-size:13px;letter-spacing:0.05em;color:#BB1F1F;font-weight:700;margin-bottom:6px">Ejemplo</div>
-          <div style="font-size:13px;line-height:1.55;color:#3A3A3A">El 60% de las consultas de postventa se responden solas con datos reales del pedido; el resto llega al equipo ya clasificado.</div>
-        </div>
-      </div>
-    </div>
-
-    
-  </div>
-</section><footer style="background:#171717;color:#fff;padding:72px 0 40px">
-  <div class="r-container">
-    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px">
-      <a href="#" style="display:inline-flex;align-items:center;gap:10px" aria-label="Renacimiento">
-        <span aria-hidden="true" style="width:8px;height:8px;background:#BB1F1F;display:inline-block"></span>
-        <span style="font-weight:600;letter-spacing:-0.02em;font-size:17px;color:#fff">Renacimiento</span>
-      </a>
-      <nav style="display:flex;flex-wrap:wrap;align-items:center;gap:24px">
-        <a href="#que-hacemos" class="r-underline" style="font-size:13px;color:rgba(255,255,255,0.6)">Qué hacemos</a>
-        <a href="#proceso" class="r-underline" style="font-size:13px;color:rgba(255,255,255,0.6)">Proceso</a>
-        <a href="#servicios" class="r-underline" style="font-size:13px;color:rgba(255,255,255,0.6)">Servicios</a>
-        <a href="https://www.linkedin.com/in/gasparsmith/" target="_blank" rel="noopener" class="r-underline" style="font-size:13px;color:rgba(255,255,255,0.6);display:inline-flex;align-items:center;gap:6px">
-          LinkedIn
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg>
-        </a>
-        <a href="/privacidad" class="r-underline" style="font-size:13px;color:rgba(255,255,255,0.6)">Privacidad</a>
-        <a href="/terminos" class="r-underline" style="font-size:13px;color:rgba(255,255,255,0.6)">Términos</a>
+<!-- 10. FOOTER -->
+<footer data-screen-label="10 Footer" style="margin-top:clamp(100px,12vw,168px);border-top:1px solid var(--line)">
+  <div style="max-width:1120px;margin:0 auto;padding:48px 20px 40px;display:flex;flex-direction:column;gap:48px">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px">
+      <a href="#" style="display:inline-flex;align-items:flex-end;gap:3px;font-weight:600;font-size:17px;letter-spacing:-0.02em">Renacimiento<span style="width:5px;height:5px;border-radius:50%;background:#B4532F;margin-bottom:5px"></span></a>
+      <nav style="display:flex;flex-wrap:wrap;gap:12px 28px;font-size:14px">
+        <a href="#que-hacemos" style="color:var(--muted);transition:color 160ms" style-hover="color:var(--ink)">Qué hacemos</a>
+        <a href="#proceso" style="color:var(--muted);transition:color 160ms" style-hover="color:var(--ink)">Proceso</a>
+        
+        <a href="https://www.linkedin.com/in/gasparsmith/" target="_blank" rel="noopener noreferrer" style="color:var(--muted);transition:color 160ms" style-hover="color:var(--ink)">LinkedIn</a>
+        <a href="/privacidad" style="color:var(--muted);transition:color 160ms" style-hover="color:var(--ink)">Privacidad</a>
+        <a href="/terminos" style="color:var(--muted);transition:color 160ms" style-hover="color:var(--ink)">Términos</a>
       </nav>
     </div>
-    <hr style="border:none;border-top:1px solid rgba(255,255,255,0.10);margin:40px 0 24px">
-    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
-      <div style="font-size:12px;color:rgba(255,255,255,0.42)">© 2026 Renacimiento. Buenos Aires, Argentina.</div>
-      <div style="font-family:var(--font-display);font-style:italic;font-size:13px;color:rgba(255,255,255,0.42)">El renacer empieza por un proceso.</div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)">
+      <span style="font-family: Geist">© 2026 Renacimiento · Buenos Aires, Argentina</span>
+      <span style="font-family: Geist">EL RENACER EMPIEZA POR ENTENDER QUE PROCESOS CONSUMEN A TU NEGOCIO.</span>
     </div>
   </div>
 </footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light'|'dark'&quot;,&quot;section&quot;:&quot;Apariencia&quot;},&quot;marqueeSeconds&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:40,&quot;min&quot;:15,&quot;max&quot;:90,&quot;step&quot;:5,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Movimiento&quot;},&quot;heroChips&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Contenido&quot;}}">
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1440, scrolled: false, menu: false, tab: 1, hideHdr: false, theme: (typeof localStorage !== 'undefined' && localStorage.getItem('rn-theme')) || this.props.theme || 'light' };
 
-</main>
+  LOGOS = [
+    ['WhatsApp', 'whatsapp'], ['Gmail', 'gmail'], ['Google Sheets', 'google-sheets'], ['Google Drive', 'google-drive'],
+    ['Notion', 'notion'], ['Slack', 'slack'], ['Mercado Pago', 'mercado-pago'], ['Mercado Libre', 'mercado-libre'],
+    ['Tienda Nube', 'tienda-nube'], ['Salesforce', 'salesforce'], ['HubSpot', 'hubspot'], ['n8n', 'n8n']
+  ].map(([name, f]) => ({ name, src: 'assets/logos/' + f + '.png' }));
 
+  RUBROS = [
+    { label: 'Petróleo y gas', problem: 'Partes diarios de pozo transcriptos a mano en planillas.', result: 'Se leen desde la foto del parte y quedan en el tablero antes del mediodía.', num: '18 h', numLabel: 'menos de carga por semana' },
+    { label: 'Estudios contables', problem: 'Comprobantes de clientes cargados a mano.', result: 'Se leen, se validan contra la categoría de Monotributo y se cargan solos.', num: '3.200', numLabel: 'comprobantes por mes sin tipear' },
+    { label: 'Agencias', problem: 'Reportes mensuales armados copiando datos de cada plataforma.', result: 'Se arman solos y llegan a cada cliente el primer día hábil.', num: '40', numLabel: 'reportes por mes, cero horas de armado' },
+    { label: 'Salud y compliance', problem: 'Vencimientos de habilitaciones y matrículas seguidos en una planilla.', result: 'El sistema avisa 30 días antes y junta la documentación que falta.', num: '0', numLabel: 'vencimientos pasados por alto' },
+    { label: 'Logística', problem: 'Remitos conformados escaneados y tipeados uno por uno.', result: 'Se leen al llegar y actualizan el estado de cada entrega.', num: '−92%', numLabel: 'errores de carga' },
+    { label: 'Retail y e-commerce', problem: 'Consultas de “¿dónde está mi pedido?” respondidas una por una.', result: 'Se responden solas con el seguimiento real del envío.', num: '60%', numLabel: 'consultas resueltas sin intervención' }
+  ];
 
-
-<script>
-  function goToBooking() {
-    const el = document.getElementById("agendar");
-    if (!el) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    el.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
-  }
-  function goToProceso() {
-    const el = document.getElementById("proceso");
-    if (!el) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    el.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
-  }
-  function handleKeyBooking(e) {
-    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); goToBooking(); }
-  }
-
-  function observeOnce(target, cb, threshold, rootMargin) {
-    if (!target) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) { cb(); io.disconnect(); }
+  gear(rIn, rOut, n) {
+    const s = (Math.PI * 2) / n; let d = '';
+    for (let i = 0; i < n; i++) {
+      const a = i * s;
+      [[rIn, a], [rOut, a + 0.14 * s], [rOut, a + 0.4 * s], [rIn, a + 0.54 * s]].forEach(([r, t], j) => {
+        d += (i === 0 && j === 0 ? 'M' : 'L') + (r * Math.cos(t)).toFixed(1) + ' ' + (r * Math.sin(t)).toFixed(1) + ' ';
       });
-    }, { threshold: threshold || 0.15, rootMargin: rootMargin || "0px" });
-    io.observe(target);
-  }
-
-  let calMounted = false;
-  function mountCal() {
-    if (calMounted) return;
-    calMounted = true;
-    const CAL_LINK = "gaspar-smith/reunion-30min";
-    try {
-      (function (C, A, L) {
-        let p = function (a, ar) { a.q.push(ar); };
-        let d = C.document;
-        C.Cal = C.Cal || function () {
-          let cal = C.Cal;
-          let ar = arguments;
-          if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; }
-          if (ar[0] === L) {
-            const api = function () { p(api, arguments); };
-            const namespace = ar[1];
-            api.q = api.q || [];
-            if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar);
-            return;
-          }
-          p(cal, ar);
-        };
-      })(window, "https://app.cal.com/embed/embed.js", "init");
-
-      window.Cal("init", "diagnostico", { origin: "https://cal.com" });
-      window.Cal.ns.diagnostico("inline", {
-        elementOrSelector: "#cal-inline",
-        config: { layout: "month_view" },
-        calLink: CAL_LINK,
-      });
-      window.Cal.ns.diagnostico("ui", {
-        theme: "light",
-        cssVarsPerTheme: { light: { "cal-brand": "#BB1F1F" } },
-        hideEventTypeDetails: false,
-        layout: "month_view",
-      });
-    } catch (e) {
-      // no-op if network blocked; skeleton remains visible
     }
+    return d + 'Z';
   }
 
-  function setupParallax() {
-    const wrap = document.getElementById("hero-wrap");
-    const img = document.getElementById("hero-img-layer");
-    const tint = document.getElementById("hero-tint");
-    if (!wrap || !img || !tint) return;
-
-    const LERP = 0.075;
-    const MAX_IMG = 14;
-    const MAX_TINT = -8;
-    const MAX_ROT = 2.2;
-
-    const target = { x: 0, y: 0 };
-    const current = { x: 0, y: 0 };
-
-    const move = (e) => {
-      const rect = wrap.getBoundingClientRect();
-      target.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      target.y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+  componentDidMount() {
+    this.anims = []; this.marqueeAnims = []; this.tilts = [];
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    this.onScroll = () => {
+      this.positionRoute();
+      const y = window.scrollY, dy = y - (this._lastY || 0); this._lastY = y;
+      let hide = this.state.hideHdr;
+      if (y < 80 || this.state.menu) hide = false; else if (dy > 6) hide = true; else if (dy < -3) hide = false;
+      if (hide !== this.state.hideHdr) this.setState({ hideHdr: hide });
+      const s = window.scrollY > 8;
+      if (s !== this.state.scrolled) this.setState({ scrolled: s });
+      if (this.touch && !this.reduced) this.tiltOnScroll();
     };
-    const leave = () => { target.x = 0; target.y = 0; };
-
-    const tick = () => {
-      current.x += (target.x - current.x) * LERP;
-      current.y += (target.y - current.y) * LERP;
-      const cx = current.x, cy = current.y;
-      img.style.transform = `translate3d(${cx * MAX_IMG}px, ${cy * MAX_IMG}px, 0) rotateY(${cx * MAX_ROT}deg) rotateX(${-cy * MAX_ROT}deg) scale(1.045)`;
-      tint.style.transform = `translate3d(${cx * MAX_TINT}px, ${cy * MAX_TINT}px, 0)`;
-      requestAnimationFrame(tick);
-    };
-
-    wrap.addEventListener("pointermove", move);
-    wrap.addEventListener("pointerleave", leave);
-    requestAnimationFrame(tick);
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.touch = window.matchMedia('(hover: none)').matches;
+    this.applyTheme(); this.mountFigs();
+    this.onResize(); this.onScroll();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.positionRoute());
+    setTimeout(() => this.positionRoute(), 400);
+    if (this.reduced) return;
+    requestAnimationFrame(() => { this.setupReveal(); this.setupMarquee(); this.setupPulse(); this.setupPlates(); });
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('scroll', this.onScroll);
+    if (this.io) this.io.disconnect();
+    if (this.figIO) this.figIO.disconnect();
+    clearTimeout(this._figT);
+    document.querySelectorAll('[data-fig]').forEach(st => { if (st._fig) { st._fig.destroy(); st._fig = null; } });
+    [...(this.anims || []), ...(this.marqueeAnims || [])].forEach(a => a.cancel());
+  }
 
-    // Navbar scrolled state
-    const nav = document.getElementById("navbar");
-    const onScroll = () => {
-      if (!nav) return;
-      if (window.scrollY > 24) nav.classList.add("is-scrolled");
-      else nav.classList.remove("is-scrolled");
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
+  componentDidUpdate(prevProps) {
+    if (prevProps && prevProps.theme !== this.props.theme && this.props.theme && this.props.theme !== this.state.theme) this.setState({ theme: this.props.theme });
+    this.applyTheme();
+    this.positionRoute();
+    if (this.reduced || !this.marqueeAnims) return;
+    if (this._lastTab === undefined) this._lastTab = this.state.tab;
+    if (this._lastTab !== this.state.tab) {
+      this._lastTab = this.state.tab;
+      const el = document.querySelector('[data-rubro-card]');
+      if (el) el.animate([{ opacity: 0.2, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 420, easing: 'cubic-bezier(.2,.7,.2,1)' });
+    }
+    const mk = `${this.props.marqueeSeconds}|${this.props.showClientLane}`;
+    if (this._lastMarquee === undefined) this._lastMarquee = mk;
+    if (this._lastMarquee !== mk) { this._lastMarquee = mk; requestAnimationFrame(() => this.setupMarquee()); }
+  }
 
-    // Reveal on scroll
-    observeOnce(document.getElementById("que-hacemos"), () => {
-      document.getElementById("que-hacemos").classList.add("is-visible");
-    }, 0.25);
-    observeOnce(document.getElementById("servicios"), () => {
-      document.getElementById("servicios").classList.add("is-visible");
-    }, 0.2);
-    document.querySelectorAll(".r-reveal").forEach((el) => {
-      observeOnce(el, () => el.classList.add("is-visible"), 0.15);
+  applyTheme() {
+    const t = this.state.theme === 'dark' ? 'dark' : 'light';
+    if (this._appliedTheme === t) return;
+    this._appliedTheme = t;
+    document.documentElement.setAttribute('data-rn-theme', t);
+    document.querySelectorAll('[data-fig]').forEach(st => st.setAttribute('data-hairline-theme', t === 'light' ? 'dark' : 'light'));
+  }
+
+  mountFigs() {
+    const reg = window.HAIRLINE_FIGS, HL = window.HL;
+    if (!reg || !HL || !reg.caos) { this._figT = setTimeout(() => this.mountFigs(), 80); return; }
+    HL.inject(document);
+    const t = this.state.theme === 'dark' ? 'light' : 'dark';
+    const go = (st, on, e) => st.dispatchEvent(new PointerEvent(on ? 'pointermove' : 'pointerleave', { pointerType: 'mouse', pointerId: 1, bubbles: false, clientX: e ? e.clientX : 0, clientY: e ? e.clientY : 0 }));
+    this.figIO = this.figIO || new IntersectionObserver(es => es.forEach(e => { const st = e.target.querySelector('[data-fig]'); if (st && st._fig) go(st, e.isIntersecting); }), { threshold: 0.45 });
+    document.querySelectorAll('[data-fig]').forEach(st => {
+      if (st._fig) return;
+      const fig = reg[st.dataset.fig]; if (!fig) return;
+      st.setAttribute('data-hairline', fig.name);
+      st.setAttribute('data-hairline-theme', t);
+      st.setAttribute('role', 'img');
+      st.setAttribute('aria-label', fig.means);
+      const svg = HL.mk('svg', { viewBox: '0 0 400 320', 'aria-hidden': 'true' }, st);
+      st._fig = fig.mount({ stage: st, svg, read: { textContent: '' } }, fig.range[1]);
+      const plate = st.closest('[data-plate]');
+      if (!plate) return;
+      if (plate.hasAttribute('data-always') || this.touch) { this.figIO.observe(plate); return; }
+      plate.addEventListener('pointermove', e => go(st, true, e));
+      plate.addEventListener('pointerleave', e => go(st, false, e));
     });
+  }
 
-    // Cal.com lazy mount
-    observeOnce(document.getElementById("agendar"), mountCal, 0.01, "400px");
+  setupReveal() {
+    const vh = window.innerHeight;
+    const ease = 'cubic-bezier(.2,.7,.2,1)';
+    this.io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target; this.io.unobserve(el);
+      if (el.hasAttribute('data-draw')) {
+        el.style.transform = '';
+        const ax = el.dataset.draw === 'y' ? 'Y' : 'X';
+        el.animate([{ transform: 'scale' + ax + '(0)' }, { transform: 'scale' + ax + '(1)' }], { duration: ax === 'Y' ? 1800 : 900, easing: ease });
+        return;
+      }
+      el.style.opacity = '';
+      el.animate([{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 500, delay: +el.dataset.rd || 0, easing: ease, fill: 'backwards' });
+    }), { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
 
-    // Hero parallax — only on fine pointer + no reduced motion + >=1024
-    if (window.matchMedia("(pointer: fine)").matches && !mq.matches && window.matchMedia("(min-width: 1024px)").matches) {
-      setupParallax();
-    }
-  });
+    document.querySelectorAll('[data-reveal]').forEach(el => {
+      if (el.getBoundingClientRect().top < vh * 0.92) return;
+      const sibs = [...el.parentElement.children].filter(c => c.hasAttribute('data-reveal'));
+      el.dataset.rd = Math.max(0, sibs.indexOf(el)) * 60;
+      el.style.opacity = '0';
+      this.io.observe(el);
+    });
+    document.querySelectorAll('[data-draw]').forEach(el => {
+      if (el.getBoundingClientRect().top < vh * 0.92) return;
+      const y = el.dataset.draw === 'y';
+      el.style.transformOrigin = y ? 'center top' : 'left center';
+      el.style.transform = y ? 'scaleY(0)' : 'scaleX(0)';
+      this.io.observe(el);
+    });
+  }
+
+  setupMarquee() {
+    (this.marqueeAnims || []).forEach(a => a.cancel());
+    const secs = (this.props.marqueeSeconds ?? 40) * 1000;
+    this.marqueeAnims = [...document.querySelectorAll('[data-marquee]')].map(t => {
+      const rev = t.dataset.dir === 'rev';
+      return t.animate([{ transform: rev ? 'translateX(-50%)' : 'translateX(0)' }, { transform: rev ? 'translateX(0)' : 'translateX(-50%)' }], { duration: rev ? secs * 1.25 : secs, iterations: Infinity });
+    });
+  }
+
+  setupPulse() {
+    document.querySelectorAll('[data-pulse]').forEach(l => {
+      const i = +l.dataset.pulse;
+      this.anims.push(l.animate([
+        { strokeDashoffset: 100, opacity: 0 },
+        { strokeDashoffset: 92, opacity: 1, offset: 0.06 },
+        { strokeDashoffset: 14, opacity: 1, offset: 0.5 },
+        { strokeDashoffset: 7, opacity: 0, offset: 0.56 },
+        { strokeDashoffset: 7, opacity: 0 }
+      ], { duration: 5200, delay: (i * 437) % 5200, iterations: Infinity, easing: 'linear' }));
+    });
+  }
+
+  setupPlates() {
+    document.querySelectorAll('[data-float]').forEach(f => {
+      this.anims.push(f.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-6px)' }], { duration: 3600, delay: +f.dataset.float * 1000, direction: 'alternate', iterations: Infinity, easing: 'ease-in-out' }));
+    });
+    document.querySelectorAll('[data-plate]').forEach(pl => {
+      const tilt = pl.querySelector('[data-tilt]');
+      const always = pl.hasAttribute('data-always');
+      const depths = [...pl.querySelectorAll('[data-depth]')];
+      const spins = [...pl.querySelectorAll('[data-spin]')].map(g => {
+        g.style.transformBox = 'fill-box'; g.style.transformOrigin = 'center';
+        const deg = g.hasAttribute('data-rev') ? -360 : 360;
+        const a = g.animate([{ transform: 'rotate(0deg)' }, { transform: `rotate(${deg}deg)` }], { duration: +g.dataset.spin * 1000, iterations: Infinity });
+        if (!always) a.pause();
+        this.anims.push(a); return a;
+      });
+      if (this.touch) { if (tilt) this.tilts.push(tilt); spins.forEach(a => a.play()); return; }
+      pl.addEventListener('mouseenter', () => spins.forEach(a => { a.play(); a.playbackRate = always ? 2.2 : 1; }));
+      pl.addEventListener('mousemove', e => {
+        const r = pl.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+        if (tilt) { tilt.style.transition = 'transform 140ms ease-out'; tilt.style.transform = `perspective(1100px) rotateX(${(-py * 6).toFixed(2)}deg) rotateY(${(px * 8).toFixed(2)}deg) translate3d(${(px * 6).toFixed(1)}px,${(py * 6).toFixed(1)}px,0)`; }
+        depths.forEach(d => { const k = +d.dataset.depth; d.style.transition = 'transform 160ms ease-out'; d.style.transform = `translate3d(${(-px * k).toFixed(1)}px,${(-py * k).toFixed(1)}px,0)`; });
+      });
+      pl.addEventListener('mouseleave', () => {
+        if (tilt) { tilt.style.transition = 'transform 700ms cubic-bezier(.2,.7,.2,1)'; tilt.style.transform = ''; }
+        depths.forEach(d => { d.style.transition = 'transform 700ms cubic-bezier(.2,.7,.2,1)'; d.style.transform = ''; });
+        spins.forEach(a => { if (always) a.playbackRate = 1; else a.pause(); });
+      });
+    });
+    if (this.touch) this.tiltOnScroll();
+  }
+
+  positionRoute() {
+    const root = document.querySelector('[data-route]');
+    if (!root) return;
+    const nodes = [...root.querySelectorAll('[data-route-node]')];
+    if (!nodes.length) return;
+    const desktop = this.state.w >= 760;
+    nodes.forEach((n, i) => {
+      if (i === 0) return;
+      const row = n.parentElement, prev = nodes[i - 1].parentElement;
+      const art = prev.querySelector('article');
+      const ph = art ? art.offsetHeight : prev.offsetHeight;
+      row.style.marginTop = desktop ? (-Math.round(ph / 2 - 24)) + 'px' : '';
+    });
+    const centers = nodes.map(n => {
+      const row = n.parentElement, plate = row.querySelector('[data-plate]');
+      if (!plate) return row.offsetTop + 52;
+      let top = 0, el = plate;
+      while (el && el !== row) { top += el.offsetTop; el = el.offsetParent; }
+      const t = Math.round(top + plate.offsetHeight / 2 - 20);
+      n.style.top = t + 'px';
+      return row.offsetTop + t + 20;
+    });
+    const first = centers[0], last = centers[centers.length - 1];
+    const line = root.querySelector('[data-route-line]'), fill = root.querySelector('[data-route-fill]');
+    if (line) { line.style.top = first + 'px'; line.style.bottom = 'auto'; line.style.height = (last - first) + 'px'; }
+    const trigger = window.innerHeight * 0.55 - root.getBoundingClientRect().top;
+    if (fill) { fill.style.top = first + 'px'; fill.style.height = Math.max(0, Math.min(last - first, trigger - first)) + 'px'; }
+    nodes.forEach((n, i) => {
+      const on = centers[i] <= trigger + 1;
+      if (n._on === on) return;
+      n._on = on;
+      n.style.background = on ? 'var(--ink)' : 'var(--surface)';
+      n.style.color = on ? 'var(--inv)' : 'var(--ink)';
+      n.style.borderColor = on ? 'var(--ink)' : 'var(--line2)';
+    });
+  }
+
+  tiltOnScroll() {
+    const vh = window.innerHeight;
+    (this.tilts || []).forEach(t => {
+      const r = t.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) return;
+      const p = (r.top + r.height / 2) / vh - 0.5;
+      t.style.transform = `perspective(900px) rotateX(${(p * 10).toFixed(2)}deg) translateY(${(p * -8).toFixed(1)}px)`;
+    });
+  }
+
+  renderVals() {
+    const { w, tab, menu } = this.state;
+    const isMobile = w < 900;
+    const xs = ['8.33%', '25%', '41.67%', '58.33%', '75%', '91.67%'];
+    const clients = Array.from({ length: 8 }, (_, i) => `CLIENTE ${String(i + 1).padStart(2, '0')}`);
+    return {
+      isDesktop: !isMobile, isMobile, menuOpen: menu,
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      closeMenu: () => this.setState({ menu: false }),
+      burgerTop: menu ? 'translateY(3.75px) rotate(45deg)' : 'none',
+      burgerBot: menu ? 'translateY(-3.75px) rotate(-45deg)' : 'none',
+      calSrc: 'https://cal.com/gaspar-smith/reunion-30min?embed=true&layout=month_view&theme=' + (this.state.theme === 'dark' ? 'dark' : 'light'),
+      isDark: this.state.theme === 'dark', isLight: this.state.theme !== 'dark',
+      toggleTheme: () => this.setState(s => { const theme = s.theme === 'dark' ? 'light' : 'dark'; try { localStorage.setItem('rn-theme', theme); } catch (e) {} return { theme }; }),
+      headerY: this.state.hideHdr && !menu ? 'translateY(-100%)' : 'none',
+      headerBorder: this.state.scrolled ? 'var(--line)' : 'transparent',
+      showChips: this.props.heroChips ?? true,
+      showClients: this.props.showClientLane ?? true,
+      logos: [...this.LOGOS, ...this.LOGOS],
+      clients: [...clients, ...clients],
+      gearBig: this.gear(66, 76, 22),
+      gearSmall: this.gear(38, 48, 13),
+      showAppLabels: w >= 760,
+      rt: w < 760
+        ? { lineLeft: '20px', nodeLeft: '0px', cardW: 'calc(100% - 56px)', jl: 'flex-end', mt: '24px' }
+        : { lineLeft: '50%', nodeLeft: 'calc(50% - 20px)', cardW: 'calc(50% - 48px)', jl: 'flex-start', mt: '-170px' },
+      apps: this.LOGOS.map(({ name, src }, i) => ({
+        name, src,
+        x: xs[i % 6], y: i < 6 ? '14%' : '86%',
+        lt: i < 6 ? 'auto' : 'calc(100% + 10px)',
+        lb: i < 6 ? 'calc(100% + 10px)' : 'auto'
+      })),
+      rubros: this.RUBROS.map((r, i) => ({
+        label: r.label,
+        bg: i === tab ? '#0E0E10' : 'transparent',
+        fg: i === tab ? '#F7F6F3' : '#5C5C63',
+        bd: i === tab ? '#0E0E10' : '#E4E3DF',
+        pick: () => this.setState({ tab: i })
+      })),
+      rubro: this.RUBROS[tab]
+    };
+  }
+}
 </script>
-
 </body>
 </html>

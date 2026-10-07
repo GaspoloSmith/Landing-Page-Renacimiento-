@@ -4,75 +4,52 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Política de Privacidad — Renacimiento</title>
-<meta name="description" content="Cómo Renacimiento recopila, usa y protege los datos, incluidos los datos de cuentas de Google a los que acceden nuestras automatizaciones.">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index,follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem('rn-theme');if(t)document.documentElement.setAttribute('data-rn-theme',t)}catch(e){}</script>
 <style>
-  :root {
-    --r-primary: #BB1F1F;
-    --r-black: #171717;
-    --r-charcoal: #3A3A3A;
-    --r-cream: #F5F2ED;
-    --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --font-display: "Bodoni Moda", "Didot", Georgia, serif;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--r-cream);
-    font-family: var(--font-sans);
-    color: var(--r-charcoal);
-    -webkit-font-smoothing: antialiased;
-    line-height: 1.65;
-  }
-  a { color: var(--r-primary); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  .r-container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
-
-  header.r-top { border-bottom: 1px solid rgba(23,23,23,0.08); }
-  header.r-top .r-container { display: flex; align-items: center; height: 68px; }
-  .r-logo { display: inline-flex; align-items: center; gap: 10px; }
-  .r-logo span.dot { width: 8px; height: 8px; background: var(--r-primary); display: inline-block; }
-  .r-logo span.name { font-weight: 600; letter-spacing: -0.02em; font-size: 17px; color: var(--r-black); }
-
-  main { padding: 64px 0 96px; }
-  .r-eyebrow { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: var(--r-primary); margin-bottom: 20px; }
-  h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.05; letter-spacing: -0.03em; color: var(--r-black); font-weight: 700; margin: 0 0 12px; }
-  .r-updated { font-size: 0.875rem; color: #6B6B6B; margin-bottom: 48px; }
-  h2 { font-size: 1.375rem; letter-spacing: -0.02em; color: var(--r-black); font-weight: 600; margin: 48px 0 12px; }
-  h3 { font-size: 1.0625rem; color: var(--r-black); font-weight: 600; margin: 28px 0 8px; }
-  p, li { font-size: 1rem; }
-  ul { padding-left: 22px; }
-  li { margin-bottom: 8px; }
-  .r-callout { background: #fff; border-left: 3px solid var(--r-primary); border-radius: 0 8px 8px 0; padding: 18px 22px; margin: 24px 0; }
-  .r-callout p:first-child { margin-top: 0; }
-  .r-callout p:last-child { margin-bottom: 0; }
-
-  footer { background: var(--r-black); color: #fff; padding: 56px 0 40px; margin-top: 96px; }
-  footer .r-container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
-  footer a { color: rgba(255,255,255,0.6); }
-  footer .r-copy { font-size: 12px; color: rgba(255,255,255,0.42); }
-  footer nav { display: flex; flex-wrap: wrap; gap: 20px; font-size: 13px; }
+*{box-sizing:border-box}
+:root,:root[data-rn-theme="light"]{--bg:#FFFFFF;--card:#FBFAF8;--ink:#0E0E10;--inv:#F7F6F3;--muted:#9A9AA0;--body:#5C5C63;--line:#E4E3DF;--hdr:rgba(255,255,255,0.82)}
+:root[data-rn-theme="dark"]{--bg:#0B0B0D;--card:#111113;--ink:#EDEDEB;--inv:#0E0E10;--muted:#8A8C95;--body:#A6A7AE;--line:#232327;--hdr:rgba(11,11,13,0.82)}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Geist',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;transition:background 300ms ease,color 300ms ease}
+a{color:var(--ink);text-decoration:none}
+p{margin:0}
+header{position:fixed;top:0;left:0;right:0;z-index:50;height:64px;background:var(--hdr);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{max-width:1120px;height:100%;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:inline-flex;align-items:flex-end;gap:3px;font-weight:600;font-size:17px;letter-spacing:-0.02em}
+.logo i{width:5px;height:5px;border-radius:50%;background:#B4532F;margin-bottom:5px}
+.back{font-size:14px;color:var(--muted);transition:color 160ms}.back:hover{color:var(--ink)}
+.theme{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;font-size:15px;margin-left:16px}
+main{max-width:760px;margin:0 auto;padding:128px 20px 80px}
+.eyebrow{font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)}
+h1{margin:14px 0 8px;font-size:clamp(34px,5vw,52px);line-height:1.08;letter-spacing:-0.02em;font-weight:600}
+.updated{font-size:14px;color:var(--muted);margin-bottom:48px}
+h2{margin:48px 0 14px;font-size:22px;letter-spacing:-0.01em;font-weight:600}
+h3{margin:28px 0 10px;font-size:16px;font-weight:600}
+main p,main li{font-size:16px;line-height:1.7;color:var(--body)}
+main p+p{margin-top:12px}
+main ul{margin:12px 0;padding-left:22px}main li{margin:6px 0}
+main strong{color:var(--ink);font-weight:600}
+main a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px;transition:text-decoration-color 160ms}
+main a:hover{text-decoration-color:var(--ink)}
+.callout{margin:24px 0;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+footer{border-top:1px solid var(--line)}
+.foot{max-width:1120px;margin:0 auto;padding:32px 20px 40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;font-size:14px;color:var(--muted)}
+.foot nav{display:flex;gap:12px 28px}.foot a{color:var(--muted);transition:color 160ms}.foot a:hover{color:var(--ink)}
 </style>
 </head>
 <body>
-
-<header class="r-top">
-  <div class="r-container">
-    <a href="/" class="r-logo" aria-label="Renacimiento — inicio">
-      <span class="dot" aria-hidden="true"></span>
-      <span class="name">Renacimiento</span>
-    </a>
-  </div>
-</header>
-
+<header><div class="bar">
+  <a href="/" class="logo" aria-label="Renacimiento — inicio">Renacimiento<i></i></a>
+  <div style="display:flex;align-items:center"><a href="/" class="back">← Volver al inicio</a><button class="theme" id="theme" aria-label="Cambiar tema" title="Cambiar tema">◐</button></div>
+</div></header>
 <main>
-  <div class="r-container">
-    <div class="r-eyebrow">Legal</div>
-    <h1>Política de Privacidad</h1>
-    <p class="r-updated">Última actualización: 31 de agosto de 2026</p>
+<div class="eyebrow">Legal</div>
+<h1>Política de Privacidad</h1>
+    <p class="updated">Última actualización: 31 de agosto de 2026</p>
 
     <h2>1. Quiénes somos</h2>
     <p><strong>Renacimiento</strong> es una consultoría de automatización con inteligencia artificial operada por Gaspar Smith, con domicilio en la Ciudad Autónoma de Buenos Aires, Argentina (en adelante, "Renacimiento", "nosotros"). Sitio web: <a href="https://renacimiento.agency">renacimiento.agency</a>. Consultas sobre privacidad: <a href="mailto:gaspismith@gmail.com">gaspismith@gmail.com</a>.</p>
@@ -108,7 +85,7 @@
       <li>El uso y la transferencia de la información recibida de las APIs de Google se ajustan a la <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, incluidos sus requisitos de uso limitado (<em>Limited Use</em>).</li>
       <li>Solo el personal de Renacimiento estrictamente necesario para operar y mantener la automatización puede acceder a estos datos, y siempre bajo obligación de confidencialidad.</li>
     </ul>
-    <div class="r-callout">
+    <div class="callout">
       <p><strong>Cómo revocar el acceso:</strong> podés retirar en cualquier momento los permisos otorgados a nuestras aplicaciones desde <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">la página de permisos de tu cuenta de Google</a>. Al hacerlo, la automatización correspondiente dejará de funcionar.</p>
     </div>
 
@@ -144,19 +121,13 @@
     <h2>11. Contacto</h2>
     <p>Renacimiento — Ciudad Autónoma de Buenos Aires, Argentina.<br>
     Correo: <a href="mailto:gaspismith@gmail.com">gaspismith@gmail.com</a></p>
-  </div>
 </main>
-
-<footer>
-  <div class="r-container">
-    <div class="r-copy">© 2026 Renacimiento. Buenos Aires, Argentina.</div>
-    <nav>
-      <a href="/">Inicio</a>
-      <a href="/privacidad">Privacidad</a>
-      <a href="/terminos">Términos</a>
-    </nav>
-  </div>
-</footer>
-
+<footer><div class="foot">
+  <span>© 2026 Renacimiento · Buenos Aires, Argentina</span>
+  <nav><a href="/">Inicio</a><a href="/privacidad">Privacidad</a><a href="/terminos">Términos</a></nav>
+</div></footer>
+<script>
+document.getElementById('theme').onclick=function(){var r=document.documentElement,t=r.getAttribute('data-rn-theme')==='dark'?'light':'dark';r.setAttribute('data-rn-theme',t);try{localStorage.setItem('rn-theme',t)}catch(e){}};
+</script>
 </body>
 </html>
