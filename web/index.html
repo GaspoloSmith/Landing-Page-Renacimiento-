@@ -24,6 +24,8 @@ html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'Geist',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;transition:background 300ms ease,color 300ms ease}
 a{color:var(--ink);text-decoration:none}
 a:hover{color:var(--ink)}
+.scp2{display:inline-flex;align-items:center;height:50px;padding:0 26px;border-radius:999px;transition:background 180ms,color 180ms}
+.scp1:hover,.scp2:hover{background:#B4532F !important;color:var(--inv) !important}
 p{margin:0}
 svg *{vector-effect:non-scaling-stroke}
 @media (max-width:759px){
@@ -52,10 +54,10 @@ section[data-screen-label="05 Integraciones"] div[data-reveal]{aspect-ratio:auto
       <a href="#" style="display:inline-flex;align-items:flex-end;gap:3px;font-weight:600;font-size:17px;letter-spacing:-0.02em;color:var(--ink)">Renacimiento<span style="width:5px;height:5px;border-radius:50%;background:#B4532F;margin-bottom:5px"></span></a>
     </div>
     <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
-      <nav style="display:flex;align-items:center;gap:32px;font-size:14px">
-        <a href="#que-hacemos" style="color:var(--muted);transition:color 160ms" style-hover="color:var(--ink)">Qué hacemos</a>
-        <a href="#como-se-ve" style="color:var(--muted);transition:color 160ms" style-hover="color:var(--ink)">Cómo se ve</a>
-        <a href="#proceso" style="color:var(--muted);transition:color 160ms" style-hover="color:var(--ink)">Proceso</a>
+      <nav style="display:flex;align-items:center;gap:4px;font-size:14px">
+        <a href="#que-hacemos" style="color:var(--muted);padding:9px 16px;border-radius:999px;transition:color 160ms,background 180ms" style-hover="background:#B4532F;color:var(--inv)">Qué hacemos</a>
+        <a href="#como-se-ve" style="color:var(--muted);padding:9px 16px;border-radius:999px;transition:color 160ms,background 180ms" style-hover="background:#B4532F;color:var(--inv)">Cómo se ve</a>
+        <a href="#proceso" style="color:var(--muted);padding:9px 16px;border-radius:999px;transition:color 160ms,background 180ms" style-hover="background:#B4532F;color:var(--inv)">Proceso</a>
         
       </nav>
     </sc-if>
@@ -97,7 +99,7 @@ section[data-screen-label="05 Integraciones"] div[data-reveal]{aspect-ratio:auto
     
     <h1 style="margin:28px 0 0;font-size:clamp(44px,5.6vw,84px);line-height:1.03;letter-spacing:-0.02em;font-weight:500;color:var(--muted);max-width:1180px;text-wrap:balance">
       <span style="display: block; color: var(--ink); font-weight: 600;">Tu empresa, sin trabajo manual.</span>
-      Rediseñamos tus procesos y los convertimos en sistemas trabajan con vos.
+      Rediseñamos tus procesos y los convertimos en sistemas que trabajan con vos.
     </h1>
     <div style="margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px">
       <a href="#agenda" class="scp1" style="display: inline-flex; align-items: center; height: 50px; padding: 0px 26px; border-radius: 999px; background: var(--ink); color: var(--inv); font-size: 15px; font-weight: 500; transition: background 180ms;">Agendar diagnóstico gratis</a>
@@ -130,7 +132,7 @@ section[data-screen-label="05 Integraciones"] div[data-reveal]{aspect-ratio:auto
 <!-- 3. QUÉ HACEMOS -->
 <section id="que-hacemos" data-screen-label="03 Qué hacemos" style="padding:clamp(100px,12vw,168px) 0 0;scroll-margin-top:64px">
   <div style="max-width:1120px;margin:0 auto;padding:0 20px">
-    <h2 data-reveal="" style="margin:0;max-width:820px;font-size:clamp(28px,3.6vw,44px);line-height:1.12;letter-spacing:-0.02em;font-weight:500;color:var(--muted);text-wrap:pretty"><span style="color:var(--ink);font-weight:600">Soluciones que se encargan de lo manual.</span> Antes de hablar de herramientas, entendemos qué estás haciendo a mano que no deberías.</h2>
+    <h2 data-reveal="" style="margin:0;max-width:820px;font-size:clamp(28px,3.6vw,44px);line-height:1.12;letter-spacing:-0.02em;font-weight:500;color:var(--muted);text-wrap:pretty"><span style="color:var(--ink);font-weight:600">Soluciones que se encargan de lo manual.</span> Ahorrándole tiempo y errores a tu equipo.</h2>
     <div style="margin-top:clamp(48px,6vw,72px);display:flex;flex-wrap:wrap;gap:16px">
 
       <article data-reveal="" style="flex:1 1 300px;min-width:0;padding:8px;border:1px solid var(--line);border-radius:16px;background:var(--card);transition:border-color 200ms ease, transform 200ms ease" style-hover="border-color:var(--line2);transform:translateY(-2px)">
@@ -209,7 +211,7 @@ section[data-screen-label="05 Integraciones"] div[data-reveal]{aspect-ratio:auto
 <!-- 4. CÓMO SE VE -->
 <section id="como-se-ve" data-screen-label="04 Cómo se ve" style="padding:clamp(100px,12vw,168px) 0 0;scroll-margin-top:64px">
   <div style="max-width:1120px;margin:0 auto;padding:0 20px">
-    <h2 data-reveal="" style="margin:0;max-width:820px;font-size:clamp(28px,3.6vw,44px);line-height:1.12;letter-spacing:-0.02em;font-weight:500;color:var(--muted);text-wrap:pretty"><span style="color:var(--ink);font-weight:600">Así trabaja un sistema de Renacimiento.</span> Sin pantallas nuevas que aprender: todo pasa donde tu equipo ya trabaja.</h2>
+    <h2 data-reveal="" style="margin:0;max-width:820px;font-size:clamp(28px,3.6vw,44px);line-height:1.12;letter-spacing:-0.02em;font-weight:500;color:var(--muted);text-wrap:pretty"><span style="color:var(--ink);font-weight:600">Así trabaja un sistema hecho por nosotros.</span> Nos acoplamos a tus herramientas actuales.</h2>
 
     <div style="margin-top:clamp(56px,7vw,96px);display:flex;flex-direction:column;gap:clamp(72px,9vw,128px)">
 
